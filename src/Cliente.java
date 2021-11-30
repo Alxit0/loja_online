@@ -9,6 +9,7 @@ public class Cliente {
     private String frequencia;
 
     public String getEmail() {return email;}
+    public String getNome() {return nome;}
 
     public Cliente(String email, String nome, String morada, String telefone, String dataNascimento) {
         this.email = email;
@@ -17,6 +18,14 @@ public class Cliente {
         this.telefone = telefone;
         this.dataNascimento = dataNascimento;
         this.frequencia = "normal";
+    }
+
+    public void fazerCompra(){
+        System.out.println(">> Compra feita");
+    }
+
+    public void mostrarCompras(){
+        System.out.println(">> Mostrar compras feitas");
     }
 
     @Override
