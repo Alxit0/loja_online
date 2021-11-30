@@ -19,13 +19,34 @@ public class Loja {
 
     public void menu(){
         Scanner sc = new Scanner(System.in);
+        System.out.println("=============== "+ clienteAtivo.getNome() + " ===============");
+        while (true){
+            System.out.println("Opções:");
+            System.out.println("\t1 - Realizar compra");
+            System.out.println("\t2 - Consultar compras");
+            System.out.println("\t0 - sair");
+            System.out.print("Opção: ");
+            int op = sc.nextInt();
+            //String op = sc.nextLine();
+            //System.out.println(op);
 
+            if (op == 0)break;
+            else if (op == 1){
+                clienteAtivo.fazerCompra();
+            }else if (op == 2){
+                clienteAtivo.mostrarCompras();
+            }
+
+        }
     }
 
     private void importarClientes(String ficheiroClientes){
         clientes = new ArrayList<>();
-        clientes.add(new Cliente("alexa@ola", "Alex",
+        clientes.add(new Cliente("alex@ola", "Alex",
                 "Aveiro", "3284294", "18-05-2002"));
+
+        clientes.add(new Cliente("a", "",
+                "", "", "18--2002"));
     }
 
     private void importarProdutos(String ficheiroProdutos){
@@ -35,15 +56,15 @@ public class Loja {
     private Cliente login(){
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Email: ");
+        System.out.print("login: ");
         String emailCliente = sc.nextLine();
         Cliente temp = procurarCliente(emailCliente);
 
         if (temp != null){
-            System.out.println("Login bem sucedido!!");
+            System.out.println("Login bem sucedido!");
             return temp;
         }else{
-            System.out.println("Cliente nao existe");
+            System.out.println("Cliente nã encontrado.");
             System.out.print("Criar novo cliente (y/n): ");
             String op = sc.nextLine();
             if (op.equals("n")){
