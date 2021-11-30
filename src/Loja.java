@@ -42,8 +42,8 @@ public class Loja {
 
     private void importarClientes(String ficheiroClientes){
         clientes = new ArrayList<>();
-        clientes.add(new Cliente("alex@ola", "Alex",
-                "Aveiro", "3284294", "18-05-2002"));
+        clientes.add(new Cliente("alexandre@hotmail.com", "Alexand Regalado",
+                "Aveiro", "916632023", "18-05-2002"));
 
         clientes.add(new Cliente("a", "",
                 "", "", "18--2002"));
