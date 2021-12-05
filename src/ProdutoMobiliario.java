@@ -7,6 +7,17 @@
  *
  * @author 3marb
  */
-public class ProdutoMobiliario {
-    
+public class ProdutoMobiliario extends Produto {
+    private int peso;
+    private int dimensao;
+
+    public ProdutoMobiliario(int identificador, String nome, int precoUni, int stockExistente, Promocao promucao, int peso, int dimensao) {
+        super(identificador, nome, precoUni, stockExistente, promucao);
+        this.peso = peso;
+        this.dimensao = dimensao;
+    }
+
+    public double peso(){
+        return peso;
+    }
 }

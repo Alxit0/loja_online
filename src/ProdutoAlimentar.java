@@ -7,13 +7,16 @@
  *
  * @author 3marb
  */
-public abstract class ProdutoAlimentar extends Produto {
+public class ProdutoAlimentar extends Produto {
     private int numCalorias;
     private int percentagemGordura;
-    public ProdutoAlimentar(int identificador,String nome,int precouni,int stockexistente,int numCalorias,int percentagemGordura){
-        super(identificador,nome,precouni,stockexistente);
-        
+
+    public ProdutoAlimentar(int identificador, String nome, int precoUni, int stockExistente, Promocao promucao, int numCalorias, int percentagemGordura) {
+        super(identificador, nome, precoUni, stockExistente, promucao);
+        this.numCalorias = numCalorias;
+        this.percentagemGordura = percentagemGordura;
     }
+
     public double peso(){
         return 0; 
     }

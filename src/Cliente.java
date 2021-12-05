@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Cliente {
@@ -7,9 +8,12 @@ public class Cliente {
     private final String telefone;
     private final String dataNascimento;
     private String frequencia;
+    private ArrayList<Compra> compras;
 
     public String getEmail() {return email;}
     public String getNome() {return nome;}
+
+    public String getFrequencia() {return frequencia;}
 
     public Cliente(String email, String nome, String morada, String telefone, String dataNascimento) {
         this.email = email;
@@ -18,10 +22,11 @@ public class Cliente {
         this.telefone = telefone;
         this.dataNascimento = dataNascimento;
         this.frequencia = "normal";
+        this.compras = new ArrayList<>();
     }
 
-    public void fazerCompra(){
-        System.out.println(">> Compra feita");
+    public void adicionamosCompra(Compra compra){
+        compras.add(compra);
     }
 
     public void mostrarCompras(){

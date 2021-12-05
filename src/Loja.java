@@ -32,12 +32,20 @@ public class Loja {
 
             if (op == 0)break;
             else if (op == 1){
-                clienteAtivo.fazerCompra();
+                clienteAtivo.adicionamosCompra(fazerCompra());
             }else if (op == 2){
                 clienteAtivo.mostrarCompras();
             }
 
         }
+    }
+
+    private Compra fazerCompra(){
+        Compra temp = new Compra(clienteAtivo.getFrequencia());
+
+
+
+        return temp;
     }
 
     private void importarClientes(String ficheiroClientes){

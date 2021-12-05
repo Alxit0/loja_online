@@ -8,5 +8,15 @@
  * @author 3marb
  */
 public class MiniVenda {
-    
+    private final Produto produto;
+    private final int quantidade;
+
+    public MiniVenda(Produto produto, int quantidade) {
+        this.produto = produto;
+        this.quantidade = quantidade;
+    }
+
+    public int custoMinivenda(){
+        return produto.custoComQuantidade(quantidade);
+    }
 }

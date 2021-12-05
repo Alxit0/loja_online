@@ -11,9 +11,10 @@ public class ProdutoLimpeza extends Produto {
     private int numCalorias;
     private int percentagemGordura;
 
-    public ProdutoLimpeza(int identificador, String nome, int precouni, int stockexistente) {
-        super(identificador, nome, precouni, stockexistente);
-        
+    public ProdutoLimpeza(int identificador, String nome, int precoUni, int stockExistente, Promocao promucao, int numCalorias, int percentagemGordura) {
+        super(identificador, nome, precoUni, stockExistente, promucao);
+        this.numCalorias = numCalorias;
+        this.percentagemGordura = percentagemGordura;
     }
 
     public double peso(){
