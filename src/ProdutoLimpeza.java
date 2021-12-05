@@ -8,13 +8,11 @@
  * @author 3marb
  */
 public class ProdutoLimpeza extends Produto {
-    private int numCalorias;
-    private int percentagemGordura;
+    private int grauToxicidade;
 
-    public ProdutoLimpeza(int identificador, String nome, int precoUni, int stockExistente, Promocao promucao, int numCalorias, int percentagemGordura) {
+    public ProdutoLimpeza(int identificador, String nome, int precoUni, int stockExistente, Promocao promucao, int grauToxicidade) {
         super(identificador, nome, precoUni, stockExistente, promucao);
-        this.numCalorias = numCalorias;
-        this.percentagemGordura = percentagemGordura;
+        this.grauToxicidade = grauToxicidade;
     }
 
     public double peso(){

@@ -2,9 +2,9 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Armazem {
-    private ArrayList<ProdutoAlimentar> produtosAlimentares;
-    private ArrayList<ProdutoLimpeza> produtosLimpeza;
-    private ArrayList<ProdutoMobiliario> produtosMobiliario;
+    private final ArrayList<ProdutoAlimentar> produtosAlimentares;
+    private final ArrayList<ProdutoLimpeza> produtosLimpeza;
+    private final ArrayList<ProdutoMobiliario> produtosMobiliario;
 
     public ArrayList<ProdutoAlimentar> getProdutosAlimentares() {return produtosAlimentares;}
     public ArrayList<ProdutoLimpeza> getProdutosLimpeza() {return produtosLimpeza;}
@@ -23,16 +23,27 @@ public class Armazem {
             String line;
             while ((line = br.readLine()) != null){
                 String[] temp = line.split(";");
-                if (temp[0].equals("Alimentar")){
-                    // int identificador, String nome, int precoUni, int stockExistente, Promocao promucao,
-                    // int numCalorias, int percentagemGordura
-                    int id = Integer.parseInt(temp[1]);
-                    int preUni = Integer.parseInt(temp[3]);
-                    int stock = Integer.parseInt(temp[4]);
-                    int calo = Integer.parseInt(temp[5]);
-                    int percGord = Integer.parseInt(temp[6]);
+                // int identificador, String nome, int precoUni, int stockExistente,
+                int id = Integer.parseInt(temp[1]);
+                int preUni = Integer.parseInt(temp[3]);
+                int stock = Integer.parseInt(temp[4]);
 
-                    produtosAlimentares.add(new ProdutoAlimentar(id, temp[2], preUni, stock,new P3L4() ,calo, percGord));
+                switch (temp[0]) {
+                    case "Alimentar" -> {
+                        //Promocao promucao, int numCalorias, int percentagemGordura
+                        int calo = Integer.parseInt(temp[5]);
+                        int percGord = Integer.parseInt(temp[6]);
+                        produtosAlimentares.add(new ProdutoAlimentar(id, temp[2], preUni, stock, new P3L4(), calo, percGord));
+                    }
+                    case "Limpeza" -> {
+                        int grauTox = Integer.parseInt(temp[5]);
+                        produtosLimpeza.add(new ProdutoLimpeza(id, temp[2], preUni, stock, new P3L4(), grauTox));
+                    }
+                    case "Mobiliário" -> {
+                        int peso = Integer.parseInt(temp[5]);
+                        int dim = Integer.parseInt(temp[6]);
+                        produtosMobiliario.add(new ProdutoMobiliario(id, temp[2], preUni, stock, new P3L4(), peso, dim));
+                    }
                 }
             }
 

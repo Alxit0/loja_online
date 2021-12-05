@@ -60,7 +60,15 @@ public class Loja {
             if (op == 0)break;
             else if (op == 1){
                 for(Produto i: armazem.getProdutosAlimentares()){
-                    System.out.println(i.getNome() + " -- " + i.getPrecouni());
+                    System.out.println(i.getNome() + " --> " + i.getPrecouni());
+                }
+            }else if (op == 2){
+                for(Produto i: armazem.getProdutosLimpeza()){
+                    System.out.println(i.getNome() + " --> " + i.getPrecouni());
+                }
+            }else if (op == 3){
+                for(Produto i: armazem.getProdutosMobiliario()){
+                    System.out.println(i.getNome() + " --> " + i.getPrecouni());
                 }
             }
         }
