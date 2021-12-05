@@ -41,7 +41,7 @@ public class Loja {
     }
 
     private Compra fazerCompra(){
-        System.out.println(">> Fazer compra");
+        System.out.println("------------- Compra -------------");
         Compra temp = new Compra(clienteAtivo.getFrequencia());
         Scanner sc = new Scanner(System.in);
 
@@ -72,7 +72,6 @@ public class Loja {
                 }
             }
         }
-
         return temp;
     }
 
@@ -87,7 +86,7 @@ public class Loja {
         clientes.add(new Cliente("alexandre@hotmail.com", "Alexand Regalado",
                 "Aveiro", "916632023", "18-05-2002"));
 
-        clientes.add(new Cliente("a", "",
+        clientes.add(new Cliente("a", "Alexandre",
                 "", "", "18--2002"));
     }
 

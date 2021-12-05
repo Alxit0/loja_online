@@ -8,8 +8,8 @@
  * @author 3marb
  */
 public class ProdutoMobiliario extends Produto {
-    private int peso;
-    private int dimensao;
+    private final int peso;
+    private final int dimensao;
 
     public ProdutoMobiliario(int identificador, String nome, int precoUni, int stockExistente, Promocao promucao, int peso, int dimensao) {
         super(identificador, nome, precoUni, stockExistente, promucao);

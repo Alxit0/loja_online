@@ -1,10 +1,10 @@
-Alimentar;1213;"Nestum";2;50;100;15
-Alimentar;1234;"Batata Frita";1;100;2000;45
-Alimentar;1269;"Chouriço";8;15;500;50
-Alimentar;1895;"Maçã";1;300;50;3
-Alimentar;1039;"Pizza";15;20;4000;30
-Limpeza;501;"Lexivia";10;30;9
-Limpeza;505;"Álcool";8;50;8
-Limpeza;510;"Sabão";5;50;1
-Limpeza;550;"Limpa pisos";15;20;6
-Limpeza;610;"Bicarbonato de sódio";10;27;6
+Alimentar;1213;Nestum;2;50;100;15
+Alimentar;1234;Batata Frita;1;100;2000;45
+Alimentar;1269;Chouriço;8;15;500;50
+Alimentar;1895;Maçã;1;300;50;3
+Alimentar;1039;Pizza;15;20;4000;30
+Limpeza;501;Lexivia;10;30;9
+Limpeza;505;Álcool;8;50;8
+Limpeza;510;Sabão;5;50;1
+Limpeza;550;Limpa pisos;15;20;6
+Limpeza;610;Bicarbonato de sódio;10;27;6
