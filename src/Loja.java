@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Loja {
     private final int data;
     private ArrayList<Cliente> clientes;
-    private ArrayList<Produto> produtos;
+    private Armazem armazem;
     private final Cliente clienteAtivo;
 
     public int getData() {return data;}
@@ -12,8 +12,8 @@ public class Loja {
 
     public Loja(int data, String ficheiroClientes, String ficheiroProdutos) {
         this.data = data;
+        this.armazem = new Armazem(ficheiroProdutos);
         importarClientes(ficheiroClientes);
-        importarProdutos(ficheiroProdutos);
         this.clienteAtivo = login();
     }
 
@@ -41,11 +41,37 @@ public class Loja {
     }
 
     private Compra fazerCompra(){
+        System.out.println(">> Fazer compra");
         Compra temp = new Compra(clienteAtivo.getFrequencia());
+        Scanner sc = new Scanner(System.in);
 
-
+        while (true){
+            /*
+            Tipo de produtos:
+                Alimetares -> 1
+                Limpeza -> 2
+                Mobiliario -> 3
+             opcao:
+             */
+            System.out.println("Tipo de produtos:");
+            System.out.println("\tAlimetares -> 1\n\tLimpeza -> 2\n\tMobiliario -> 3");
+            System.out.print("Opção: ");
+            int op = sc.nextInt();
+            if (op == 0)break;
+            else if (op == 1){
+                for(Produto i: armazem.getProdutosAlimentares()){
+                    System.out.println(i.getNome() + " -- " + i.getPrecouni());
+                }
+            }
+        }
 
         return temp;
+    }
+
+    private void menuCompras(ArrayList<Produto> prods){
+        for(Produto i: prods){
+            System.out.println(i.getNome() + " -- " + i.getPrecouni());
+        }
     }
 
     private void importarClientes(String ficheiroClientes){
@@ -55,10 +81,6 @@ public class Loja {
 
         clientes.add(new Cliente("a", "",
                 "", "", "18--2002"));
-    }
-
-    private void importarProdutos(String ficheiroProdutos){
-         this.produtos = new ArrayList<>();
     }
 
     private Cliente login(){

@@ -15,6 +15,7 @@ abstract class Produto {
     private final Promocao promocao;
 
     public int getPrecouni() {return precoUni;}
+    public String getNome() {return nome;}
 
     public Produto(int identificador, String nome, int precoUni, int stockExistente, Promocao promucao){
         this.identificador=identificador;
