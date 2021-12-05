@@ -10,8 +10,9 @@
 public class ProdutoLimpeza extends Produto {
     private int grauToxicidade;
 
-    public ProdutoLimpeza(int identificador, String nome, int precoUni, int stockExistente, Promocao promucao, int grauToxicidade) {
-        super(identificador, nome, precoUni, stockExistente, promucao);
+    public ProdutoLimpeza(int identificador, String nome, int precoUni, int stockExistente, String diasP3L4,
+                          String diasPagueMenos, int grauToxicidade) {
+        super(identificador, nome, precoUni, stockExistente, diasP3L4, diasPagueMenos);
         this.grauToxicidade = grauToxicidade;
     }
 

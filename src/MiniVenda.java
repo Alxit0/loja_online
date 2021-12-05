@@ -16,7 +16,12 @@ public class MiniVenda {
         this.quantidade = quantidade;
     }
 
-    public int custoMinivenda(){
-        return produto.custoComQuantidade(quantidade);
+    public int custoMinivenda(int dia){
+        return produto.custoComQuantidade(dia, quantidade);
+    }
+
+    public String versaoTalao(int dia) {
+        return produto.getNome()+" ------ "+ quantidade + " unidade(s) "
+                + custoMinivenda(dia) + "$ " + produto.promo(dia);
     }
 }

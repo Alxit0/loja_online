@@ -31,18 +31,19 @@ public class Armazem {
                 switch (temp[0]) {
                     case "Alimentar" -> {
                         //Promocao promucao, int numCalorias, int percentagemGordura
-                        int calo = Integer.parseInt(temp[5]);
-                        int percGord = Integer.parseInt(temp[6]);
-                        produtosAlimentares.add(new ProdutoAlimentar(id, temp[2], preUni, stock, new P3L4(), calo, percGord));
+                        int calo = Integer.parseInt(temp[7]);
+                        int percGord = Integer.parseInt(temp[8]);
+                        produtosAlimentares.add(new ProdutoAlimentar(id, temp[2], preUni, stock, temp[5], temp[6],
+                                calo, percGord));
                     }
                     case "Limpeza" -> {
-                        int grauTox = Integer.parseInt(temp[5]);
-                        produtosLimpeza.add(new ProdutoLimpeza(id, temp[2], preUni, stock, new P3L4(), grauTox));
+                        int grauTox = Integer.parseInt(temp[7]);
+                        produtosLimpeza.add(new ProdutoLimpeza(id, temp[2], preUni, stock, temp[5], temp[6], grauTox));
                     }
                     case "Mobiliário" -> {
-                        int peso = Integer.parseInt(temp[5]);
-                        int dim = Integer.parseInt(temp[6]);
-                        produtosMobiliario.add(new ProdutoMobiliario(id, temp[2], preUni, stock, new P3L4(), peso, dim));
+                        int peso = Integer.parseInt(temp[7]);
+                        int dim = Integer.parseInt(temp[8]);
+                        produtosMobiliario.add(new ProdutoMobiliario(id, temp[2], preUni, stock, temp[5], temp[6], peso, dim));
                     }
                 }
             }

@@ -3,17 +3,19 @@ import java.util.ArrayList;
 public class Compra {
     private final String frequencia;
     private ArrayList<MiniVenda> miniVendas;
+    private final int dia;
 
-    public Compra(String frequencia) {
+    public Compra(String frequencia, int dia) {
         this.frequencia = frequencia;
         this.miniVendas = new ArrayList<>();
+        this.dia = dia;
     }
 
     public int precoCompra(){
         int precoFinal = 0;
 
         for(MiniVenda i: miniVendas){
-            precoFinal += i.custoMinivenda();
+            precoFinal += i.custoMinivenda(dia);
         }
 
         if (frequencia.equals("Frequente") && precoFinal < 40)
@@ -22,5 +24,30 @@ public class Compra {
             precoFinal += 20;
 
         return precoFinal;
+    }
+
+    public void adicionarMinivenda(Produto prod, int quant){
+        miniVendas.add(new MiniVenda(prod, quant));
+    }
+
+    @Override
+    public String toString() {
+        /*
+        Compra no dia xx:
+        Prodtuto [quntidade] --- precFinal (P3L4)
+
+        Prodtuto ----- quntidade
+        Prodtuto ----- quntidade
+        Prodtuto ----- quntidade
+        ...
+
+         */
+
+        String resp = "";
+        for (MiniVenda i: miniVendas){
+            resp += i.versaoTalao(dia) + "\n";
+        }
+        return "Compra no dia "+ dia +":\n"+resp;
+
     }
 }

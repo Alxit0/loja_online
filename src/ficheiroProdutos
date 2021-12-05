@@ -1,10 +1,15 @@
-Alimentar;1213;Nestum;2;50;100;15
-Alimentar;1234;Batata Frita;1;100;2000;45
-Alimentar;1269;Chouriço;8;15;500;50
-Alimentar;1895;Maçã;1;300;50;3
-Alimentar;1039;Pizza;15;20;4000;30
-Limpeza;501;Lexivia;10;30;9
-Limpeza;505;Álcool;8;50;8
-Limpeza;510;Sabão;5;50;1
-Limpeza;550;Limpa pisos;15;20;6
-Limpeza;610;Bicarbonato de sódio;10;27;6
+Alimentar;1213;Nestum;2;50;0!10;20!30;100;15
+Alimentar;1234;Batata Frita;1;100;0!10;20!30;2000;45
+Alimentar;1269;Chouriço;8;15;0!10;20!30;500;50
+Alimentar;1895;Maçã;1;300;0!10;20!30;50;3
+Alimentar;1039;Pizza;15;20;0!10;20!30;4000;30
+Limpeza;501;Lexivia;10;30;10!20;0!10;9
+Limpeza;505;Álcool;8;50;10!20;0!10;8
+Limpeza;510;Sabão;5;50;10!20;0!10;1
+Limpeza;550;Limpa pisos;15;20;10!20;0!10;6
+Limpeza;610;Bicarbonato de sódio;10;27;10!20;0!10;6
+Mobiliário;190;"Cadeira";80;7;5!20;24!31;0;7
+Mobiliário;103;"Pouf";30;20;5!20;24!31;0;5
+Mobiliário;56;"Mesa";300;3;5!20;24!31;100;3
+Mobiliário;39;"Armário";600;6;5!20;24!31;150;5
+Mobiliário;171;"Cama";400;7;5!20;24!31;200;6

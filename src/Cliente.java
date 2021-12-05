@@ -30,7 +30,9 @@ public class Cliente {
     }
 
     public void mostrarCompras(){
-        System.out.println(">> Mostrar compras feitas");
+        for (Compra i: compras){
+            System.out.println(i);
+        }
     }
 
     @Override

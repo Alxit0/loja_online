@@ -11,8 +11,9 @@ public class ProdutoMobiliario extends Produto {
     private final int peso;
     private final int dimensao;
 
-    public ProdutoMobiliario(int identificador, String nome, int precoUni, int stockExistente, Promocao promucao, int peso, int dimensao) {
-        super(identificador, nome, precoUni, stockExistente, promucao);
+    public ProdutoMobiliario(int identificador, String nome, int precoUni, int stockExistente, String diasP3L4,
+                             String diasPagueMenos, int peso, int dimensao) {
+        super(identificador, nome, precoUni, stockExistente, diasP3L4, diasPagueMenos);
         this.peso = peso;
         this.dimensao = dimensao;
     }

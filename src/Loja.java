@@ -41,8 +41,8 @@ public class Loja {
     }
 
     private Compra fazerCompra(){
-        System.out.println("------------- Compra -------------");
-        Compra temp = new Compra(clienteAtivo.getFrequencia());
+        System.out.println(">>>>>>>>>>>> Compra <<<<<<<<<<<<");
+        Compra temp = new Compra(clienteAtivo.getFrequencia(), data);
         Scanner sc = new Scanner(System.in);
 
         while (true){
@@ -59,26 +59,52 @@ public class Loja {
             int op = sc.nextInt();
             if (op == 0)break;
             else if (op == 1){
+                System.out.println("-------------- Alimentares --------------");
                 for(Produto i: armazem.getProdutosAlimentares()){
-                    System.out.println(i.getNome() + " --> " + i.getPrecouni());
+                    System.out.println(i.getNome() + " -- " + i.getPrecouni());
                 }
-            }else if (op == 2){
+                while (true){
+                    System.out.print("Produto: ");
+                    int item = sc.nextInt();
+                    if (item == 0)break;
+                    Produto produtoemQuestao = armazem.getProdutosAlimentares().get(item - 1);
+                    System.out.print("Quantidade de "+produtoemQuestao.getNome()+": ");
+                    int quant = sc.nextInt();
+                    temp.adicionarMinivenda(produtoemQuestao, quant);
+                }
+            }
+            else if (op == 2){
+                System.out.println("-------------- Limpeza --------------");
                 for(Produto i: armazem.getProdutosLimpeza()){
-                    System.out.println(i.getNome() + " --> " + i.getPrecouni());
+                    System.out.println(i.getNome() + " -- " + i.getPrecouni());
                 }
-            }else if (op == 3){
+                while (true){
+                    System.out.print("Produto: ");
+                    int item = sc.nextInt();
+                    if (item == 0)break;
+                    Produto produtoemQuestao = armazem.getProdutosLimpeza().get(item - 1);
+                    System.out.print("Quantidade de "+produtoemQuestao.getNome()+": ");
+                    int quant = sc.nextInt();
+                    temp.adicionarMinivenda(produtoemQuestao, quant);
+                }
+            }
+            else if (op == 3){
+                System.out.println("-------------- Mobiliario --------------");
                 for(Produto i: armazem.getProdutosMobiliario()){
-                    System.out.println(i.getNome() + " --> " + i.getPrecouni());
+                    System.out.println(i.getNome() + " -- " + i.getPrecouni());
+                }
+                while (true){
+                    System.out.print("Produto: ");
+                    int item = sc.nextInt();
+                    if (item == 0)break;
+                    Produto produtoemQuestao = armazem.getProdutosMobiliario().get(item - 1);
+                    System.out.print("Quantidade de "+produtoemQuestao.getNome()+": ");
+                    int quant = sc.nextInt();
+                    temp.adicionarMinivenda(produtoemQuestao, quant);
                 }
             }
         }
         return temp;
-    }
-
-    private void menuCompras(ArrayList<Produto> prods){
-        for(Produto i: prods){
-            System.out.println(i.getNome() + " -- " + i.getPrecouni());
-        }
     }
 
     private void importarClientes(String ficheiroClientes){
