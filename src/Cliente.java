@@ -39,6 +39,4 @@ public class Cliente {
                 ", frequencia='" + frequencia + '\'' +
                 '}';
     }
-
-
 }
