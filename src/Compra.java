@@ -29,7 +29,13 @@ public class Compra {
     }
 
     public void adicionarMinivenda(Produto prod, int quant){
+        for(MiniVenda i: miniVendas){
+            if (i.getProduto().getIdentificador() == prod.getIdentificador())
+                i.setQuantidade(i.getQuantidade()+quant);
+            return;
+        }
         miniVendas.add(new MiniVenda(prod, quant));
+
     }
 
     @Override

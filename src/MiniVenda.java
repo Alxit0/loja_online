@@ -9,7 +9,12 @@
  */
 public class MiniVenda {
     private final Produto produto;
-    private final int quantidade;
+    private int quantidade;
+
+    public Produto getProduto() {return produto;}
+    public int getQuantidade() {return quantidade;}
+
+    public void setQuantidade(int quantidade) {this.quantidade = quantidade;}
 
     public MiniVenda(Produto produto, int quantidade) {
         this.produto = produto;

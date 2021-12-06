@@ -73,6 +73,14 @@ public class Loja {
                     Produto produtoEmQuestao = armazem.getProdutosAlimentares().get(item - 1);
                     System.out.print("   Quantidade de "+produtoEmQuestao.getNome()+": ");
                     int quant = sc.nextInt();
+
+                    while (produtoEmQuestao.getStockExistente() < quant){
+                        System.out.println("   >> Stock insuficiente");
+                        System.out.print("   Quantidade de "+produtoEmQuestao.getNome()+": ");
+                        quant = sc.nextInt();
+                    }
+                    produtoEmQuestao.setStockExistente(produtoEmQuestao.getStockExistente() - quant);
+
                     temp.adicionarMinivenda(produtoEmQuestao, quant);
                 }
             }
@@ -87,10 +95,18 @@ public class Loja {
                     System.out.print(">> Tecla: ");
                     int item = sc.nextInt();
                     if (item == 0)break;
-                    Produto produtoemQuestao = armazem.getProdutosLimpeza().get(item - 1);
-                    System.out.print("   Quantidade de "+produtoemQuestao.getNome()+": ");
+                    Produto produtoEmQuestao = armazem.getProdutosLimpeza().get(item - 1);
+                    System.out.print("   Quantidade de "+produtoEmQuestao.getNome()+": ");
                     int quant = sc.nextInt();
-                    temp.adicionarMinivenda(produtoemQuestao, quant);
+
+                    while (produtoEmQuestao.getStockExistente() < quant){
+                        System.out.println("   >> Stock insuficiente");
+                        System.out.print("   Quantidade de "+produtoEmQuestao.getNome()+": ");
+                        quant = sc.nextInt();
+                    }
+                    produtoEmQuestao.setStockExistente(produtoEmQuestao.getStockExistente() - quant);
+
+                    temp.adicionarMinivenda(produtoEmQuestao, quant);
                 }
             }
             else if (op == 3){
@@ -104,10 +120,18 @@ public class Loja {
                     System.out.print(">> Tecla: ");
                     int item = sc.nextInt();
                     if (item == 0)break;
-                    Produto produtoemQuestao = armazem.getProdutosMobiliario().get(item - 1);
-                    System.out.print("   Quantidade de "+produtoemQuestao.getNome()+": ");
+                    Produto produtoEmQuestao = armazem.getProdutosMobiliario().get(item - 1);
+                    System.out.print("   Quantidade de "+produtoEmQuestao.getNome()+": ");
                     int quant = sc.nextInt();
-                    temp.adicionarMinivenda(produtoemQuestao, quant);
+
+                    while (produtoEmQuestao.getStockExistente() < quant){
+                        System.out.println("   >> Stock insuficiente");
+                        System.out.print("   Quantidade de "+produtoEmQuestao.getNome()+": ");
+                        quant = sc.nextInt();
+                    }
+                    produtoEmQuestao.setStockExistente(produtoEmQuestao.getStockExistente() - quant);
+
+                    temp.adicionarMinivenda(produtoEmQuestao, quant);
                 }
             }
         }

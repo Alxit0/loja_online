@@ -11,13 +11,17 @@ abstract class Produto {
     private final int identificador;
     private final String nome;
     private final int precoUni;
-    private final int stockExistente;
+    private int stockExistente;
 
     private final String diasP3L4;
     private final String diasPagueMenos;
 
     public int getPrecoUni() {return precoUni;}
     public String getNome() {return nome;}
+    public int getStockExistente() {return stockExistente;}
+    public int getIdentificador() {return identificador;}
+
+    public void setStockExistente(int stockExistente) {this.stockExistente = stockExistente;}
 
     public Produto(int identificador, String nome, int precoUni, int stockExistente, String diasP3L4, String diasPagueMenos){
         this.identificador=identificador;
