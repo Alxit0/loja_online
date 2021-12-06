@@ -47,7 +47,8 @@ public class Armazem {
                     }
                 }
             }
-
+            br.close();
+            fr.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

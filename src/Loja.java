@@ -2,15 +2,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Loja {
-    private final int data;
+    private final String data;
     private ArrayList<Cliente> clientes;
     private final Armazem armazem;
     private final Cliente clienteAtivo;
 
-    public int getData() {return data;}
+    public String getData() {return data;}
     public Cliente getClienteAtivo() {return clienteAtivo;}
 
-    public Loja(int data, String ficheiroClientes, String ficheiroProdutos) {
+    public Loja(String data, String ficheiroClientes, String ficheiroProdutos) {
         this.data = data;
         this.armazem = new Armazem(ficheiroProdutos);
         importarClientes(ficheiroClientes);
@@ -32,7 +32,7 @@ public class Loja {
 
             if (op == 0)break;
             else if (op == 1){
-                clienteAtivo.adicionamosCompra(fazerCompra());
+                clienteAtivo.adicionamosCompra(fazerCompra(sc));
             }else if (op == 2){
                 clienteAtivo.mostrarCompras();
             }
@@ -40,10 +40,9 @@ public class Loja {
         }
     }
 
-    private Compra fazerCompra(){
+    private Compra fazerCompra(Scanner sc){
         System.out.println(">>>>>>>>>>>>>>>>> Compra <<<<<<<<<<<<<<<<<");
         Compra temp = new Compra(clienteAtivo.getFrequencia(), data);
-        Scanner sc = new Scanner(System.in);
 
         while (true){
             System.out.println("-------------- Catalago --------------");

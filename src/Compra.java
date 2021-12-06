@@ -3,12 +3,14 @@ import java.util.ArrayList;
 public class Compra {
     private final String frequencia;
     private ArrayList<MiniVenda> miniVendas;
+    private final String data;
     private final int dia;
 
-    public Compra(String frequencia, int dia) {
+    public Compra(String frequencia, String data) {
         this.frequencia = frequencia;
         this.miniVendas = new ArrayList<>();
-        this.dia = dia;
+        this.data = data;
+        this.dia = Integer.parseInt(data.split("-")[0]);
     }
 
     public int precoCompra(){
@@ -47,7 +49,7 @@ public class Compra {
         for (MiniVenda i: miniVendas){
             resp.append(i.versaoTalao(dia)).append("\n\t");
         }
-        return "Compra no dia "+ dia +":\n"+resp;
+        return "Compra no dia "+ data +":\n"+resp;
 
     }
 }
