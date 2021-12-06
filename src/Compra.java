@@ -1,3 +1,4 @@
+import javax.swing.plaf.SpinnerUI;
 import java.util.ArrayList;
 
 public class Compra {
@@ -29,13 +30,14 @@ public class Compra {
     }
 
     public void adicionarMinivenda(Produto prod, int quant){
+        boolean chek = true;
         for(MiniVenda i: miniVendas){
-            if (i.getProduto().getIdentificador() == prod.getIdentificador())
-                i.setQuantidade(i.getQuantidade()+quant);
-            return;
+            if (i.getProduto().getIdentificador() == prod.getIdentificador()) {
+                i.setQuantidade(i.getQuantidade() + quant);
+                chek = false;
+            }
         }
-        miniVendas.add(new MiniVenda(prod, quant));
-
+        if (chek) miniVendas.add(new MiniVenda(prod, quant));
     }
 
     @Override
@@ -55,7 +57,7 @@ public class Compra {
         for (MiniVenda i: miniVendas){
             resp.append(i.versaoTalao(dia)).append("\n\t");
         }
-        return "Compra no dia "+ data +":\n"+resp;
+        return "Compra no dia "+ data +":\n\t"+resp;
 
     }
 }

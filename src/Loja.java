@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -32,7 +36,7 @@ public class Loja {
 
             if (op == 0)break;
             else if (op == 1){
-                clienteAtivo.adicionamosCompra(fazerCompra(sc));
+                clienteAtivo.adicionamosCompra(sc, armazem, data, clienteAtivo);
             }else if (op == 2){
                 clienteAtivo.mostrarCompras();
             }
@@ -40,114 +44,56 @@ public class Loja {
         }
     }
 
-    private Compra fazerCompra(Scanner sc){
-        System.out.println(">>>>>>>>>>>>>>>>> Compra <<<<<<<<<<<<<<<<<");
-        Compra temp = new Compra(clienteAtivo.getFrequencia(), data);
-
-        while (true){
-            System.out.println("-------------- Catalago --------------");
-            /*
-            Tipo de produtos:
-                Alimetares -> 1
-                Limpeza -> 2
-                Mobiliario -> 3
-             opcao:
-             */
-            System.out.println("Tipo de produtos:");
-            System.out.println("\t1 > Alimetares\n\t2 > Limpeza\n\t3 > Mobiliario\n\t0 > Sair");
-            System.out.print("Opção: ");
-            int op = sc.nextInt();
-            if (op == 0)break;
-            else if (op == 1){
-                System.out.println("------------- Alimentare -------------");
-                ArrayList<ProdutoAlimentar> listaTemp = armazem.getProdutosAlimentares();
-                for (int i = 0; i < listaTemp.size(); i++) {
-                    ProdutoAlimentar prodTemp= listaTemp.get(i);
-                    System.out.println("["+ (i+1) +"] "+prodTemp.getNome()+ "--> "+prodTemp.getPrecoUni());
-                }
-                System.out.println("[0] Voltar");
-                while (true){
-                    System.out.print(">> Tecla: ");
-                    int item = sc.nextInt();
-                    if (item == 0)break;
-                    Produto produtoEmQuestao = armazem.getProdutosAlimentares().get(item - 1);
-                    System.out.print("   Quantidade de "+produtoEmQuestao.getNome()+": ");
-                    int quant = sc.nextInt();
-
-                    while (produtoEmQuestao.getStockExistente() < quant){
-                        System.out.println("   >> Stock insuficiente");
-                        System.out.print("   Quantidade de "+produtoEmQuestao.getNome()+": ");
-                        quant = sc.nextInt();
-                    }
-                    produtoEmQuestao.setStockExistente(produtoEmQuestao.getStockExistente() - quant);
-
-                    temp.adicionarMinivenda(produtoEmQuestao, quant);
-                }
-            }
-            else if (op == 2){
-                System.out.println("-------------- Limpeza --------------");
-                ArrayList<ProdutoLimpeza> listaTemp = armazem.getProdutosLimpeza();
-                for (int i = 0; i < listaTemp.size(); i++) {
-                    ProdutoLimpeza prodTemp= listaTemp.get(i);
-                    System.out.println("["+ (i+1) +"] "+prodTemp.getNome()+ "--> "+prodTemp.getPrecoUni());
-                }
-                while (true){
-                    System.out.print(">> Tecla: ");
-                    int item = sc.nextInt();
-                    if (item == 0)break;
-                    Produto produtoEmQuestao = armazem.getProdutosLimpeza().get(item - 1);
-                    System.out.print("   Quantidade de "+produtoEmQuestao.getNome()+": ");
-                    int quant = sc.nextInt();
-
-                    while (produtoEmQuestao.getStockExistente() < quant){
-                        System.out.println("   >> Stock insuficiente");
-                        System.out.print("   Quantidade de "+produtoEmQuestao.getNome()+": ");
-                        quant = sc.nextInt();
-                    }
-                    produtoEmQuestao.setStockExistente(produtoEmQuestao.getStockExistente() - quant);
-
-                    temp.adicionarMinivenda(produtoEmQuestao, quant);
-                }
-            }
-            else if (op == 3){
-                System.out.println("-------------- Mobiliario --------------");
-                ArrayList<ProdutoMobiliario> listaTemp = armazem.getProdutosMobiliario();
-                for (int i = 0; i < listaTemp.size(); i++) {
-                    ProdutoMobiliario prodTemp= listaTemp.get(i);
-                    System.out.println("["+ (i+1) +"] "+prodTemp.getNome()+ "--> "+prodTemp.getPrecoUni());
-                }
-                while (true){
-                    System.out.print(">> Tecla: ");
-                    int item = sc.nextInt();
-                    if (item == 0)break;
-                    Produto produtoEmQuestao = armazem.getProdutosMobiliario().get(item - 1);
-                    System.out.print("   Quantidade de "+produtoEmQuestao.getNome()+": ");
-                    int quant = sc.nextInt();
-
-                    while (produtoEmQuestao.getStockExistente() < quant){
-                        System.out.println("   >> Stock insuficiente");
-                        System.out.print("   Quantidade de "+produtoEmQuestao.getNome()+": ");
-                        quant = sc.nextInt();
-                    }
-                    produtoEmQuestao.setStockExistente(produtoEmQuestao.getStockExistente() - quant);
-
-                    temp.adicionarMinivenda(produtoEmQuestao, quant);
-                }
-            }
-        }
-        System.out.println("Total: "+temp.precoCompra()+"$");
-        System.out.println(">>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<");
-
-        return temp;
-    }
-
     private void importarClientes(String ficheiroClientes){
         clientes = new ArrayList<>();
-        clientes.add(new Cliente("alexandre@hotmail.com", "Alexand Regalado",
-                "Aveiro", "916632023", "18-05-2002"));
+        File f = new File(ficheiroClientes);
+        try {
+            FileReader fr = new FileReader(f);
+            BufferedReader br = new BufferedReader(fr);
 
-        clientes.add(new Cliente("a", "Alexandre",
-                "", "", "18--2002"));
+            String line;
+            while ((line = br.readLine()) != null){
+                String[] temp = line.split(";");
+                Cliente clienteTemp = new Cliente(temp[0], temp[1], temp[2], temp[3], temp[4]);
+
+                // iniciar array de compras
+                ArrayList<Compra> compras = new ArrayList<>();
+                clienteTemp.setFrequencia("");
+                for (String j: temp[5].split("&")) {
+
+                    Compra compraTemp = new Compra(clienteTemp.getFrequencia(), j.split("%")[0]);
+
+                    // iterar miniVendas
+                    for(String i: j.split("%")[1].split("@")){
+                        int quant = Integer.parseInt(i.split("!")[0]);
+
+                        int id = Integer.parseInt(i.split("!")[0]);
+                        int power = (int) Math.pow(10, (int) Math.log10(id));
+                        int pointer = id / power;
+                        int index = id % power;
+
+                        if (pointer == 0){
+                            compraTemp.adicionarMinivenda(armazem.getProdutosAlimentares().get(index), quant);
+                        }else if (pointer == 1)
+                            compraTemp.adicionarMinivenda(armazem.getProdutosLimpeza().get(index), quant);
+                        else
+                            compraTemp.adicionarMinivenda(armazem.getProdutosLimpeza().get(index), quant);
+                    }
+                    compras.add(compraTemp);
+
+                    if (compras.size() > 2){
+                        clienteTemp.setFrequencia("regular");
+                    }
+                }
+                clienteTemp.setCompras(compras);
+                clientes.add(clienteTemp);
+
+            }
+            br.close();
+            fr.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private Cliente login(){
