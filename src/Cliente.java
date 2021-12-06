@@ -7,8 +7,8 @@ public class Cliente {
     private final String morada;
     private final String telefone;
     private final String dataNascimento;
-    private String frequencia;
-    private ArrayList<Compra> compras;
+    private final String frequencia;
+    private final ArrayList<Compra> compras;
 
     public String getEmail() {return email;}
     public String getNome() {return nome;}
@@ -30,6 +30,7 @@ public class Cliente {
     }
 
     public void mostrarCompras(){
+        System.out.println(">>>>>>>>>> Historico de Compras <<<<<<<<<<");
         for (Compra i: compras){
             System.out.println(i);
         }
