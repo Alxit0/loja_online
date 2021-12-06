@@ -16,7 +16,7 @@ abstract class Produto {
     private final String diasP3L4;
     private final String diasPagueMenos;
 
-    public int getPrecouni() {return precoUni;}
+    public int getPrecoUni() {return precoUni;}
     public String getNome() {return nome;}
 
     public Produto(int identificador, String nome, int precoUni, int stockExistente, String diasP3L4, String diasPagueMenos){

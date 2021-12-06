@@ -55,32 +55,37 @@ public class Loja {
              opcao:
              */
             System.out.println("Tipo de produtos:");
-            System.out.println("\tAlimetares -> 1\n\tLimpeza -> 2\n\tMobiliario -> 3\n\tSair -> 0");
+            System.out.println("\t1 > Alimetares\n\t2 > Limpeza\n\t3 > Mobiliario\n\t0 > Sair");
             System.out.print("Opção: ");
             int op = sc.nextInt();
             if (op == 0)break;
             else if (op == 1){
-                System.out.println("-------------- Alimentares --------------");
-                for(Produto i: armazem.getProdutosAlimentares()){
-                    System.out.println(i.getNome() + " -- " + i.getPrecouni());
+                System.out.println("------------- Alimentare -------------");
+                ArrayList<ProdutoAlimentar> listaTemp = armazem.getProdutosAlimentares();
+                for (int i = 0; i < listaTemp.size(); i++) {
+                    ProdutoAlimentar prodTemp= listaTemp.get(i);
+                    System.out.println("["+ (i+1) +"] "+prodTemp.getNome()+ "--> "+prodTemp.getPrecoUni());
                 }
+                System.out.println("[0] Voltar");
                 while (true){
-                    System.out.print(">> Produto: ");
+                    System.out.print(">> Tecla: ");
                     int item = sc.nextInt();
                     if (item == 0)break;
-                    Produto produtoemQuestao = armazem.getProdutosAlimentares().get(item - 1);
-                    System.out.print("   Quantidade de "+produtoemQuestao.getNome()+": ");
+                    Produto produtoEmQuestao = armazem.getProdutosAlimentares().get(item - 1);
+                    System.out.print("   Quantidade de "+produtoEmQuestao.getNome()+": ");
                     int quant = sc.nextInt();
-                    temp.adicionarMinivenda(produtoemQuestao, quant);
+                    temp.adicionarMinivenda(produtoEmQuestao, quant);
                 }
             }
             else if (op == 2){
                 System.out.println("-------------- Limpeza --------------");
-                for(Produto i: armazem.getProdutosLimpeza()){
-                    System.out.println(i.getNome() + " -- " + i.getPrecouni());
+                ArrayList<ProdutoLimpeza> listaTemp = armazem.getProdutosLimpeza();
+                for (int i = 0; i < listaTemp.size(); i++) {
+                    ProdutoLimpeza prodTemp= listaTemp.get(i);
+                    System.out.println("["+ (i+1) +"] "+prodTemp.getNome()+ "--> "+prodTemp.getPrecoUni());
                 }
                 while (true){
-                    System.out.print(">> Produto: ");
+                    System.out.print(">> Tecla: ");
                     int item = sc.nextInt();
                     if (item == 0)break;
                     Produto produtoemQuestao = armazem.getProdutosLimpeza().get(item - 1);
@@ -91,11 +96,13 @@ public class Loja {
             }
             else if (op == 3){
                 System.out.println("-------------- Mobiliario --------------");
-                for(Produto i: armazem.getProdutosMobiliario()){
-                    System.out.println(i.getNome() + " -- " + i.getPrecouni());
+                ArrayList<ProdutoMobiliario> listaTemp = armazem.getProdutosMobiliario();
+                for (int i = 0; i < listaTemp.size(); i++) {
+                    ProdutoMobiliario prodTemp= listaTemp.get(i);
+                    System.out.println("["+ (i+1) +"] "+prodTemp.getNome()+ "--> "+prodTemp.getPrecoUni());
                 }
                 while (true){
-                    System.out.print(">> Produto: ");
+                    System.out.print(">> Tecla: ");
                     int item = sc.nextInt();
                     if (item == 0)break;
                     Produto produtoemQuestao = armazem.getProdutosMobiliario().get(item - 1);
@@ -105,8 +112,9 @@ public class Loja {
                 }
             }
         }
-        System.out.println("Total: "+temp.precoCompra());
-        System.out.println("--------------------------------------");
+        System.out.println("Total: "+temp.precoCompra()+"$");
+        System.out.println(">>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<");
+
         return temp;
     }
 

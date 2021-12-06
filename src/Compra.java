@@ -43,9 +43,9 @@ public class Compra {
 
          */
 
-        String resp = "";
+        StringBuilder resp = new StringBuilder();
         for (MiniVenda i: miniVendas){
-            resp += i.versaoTalao(dia) + "\n";
+            resp.append(i.versaoTalao(dia)).append("\n\t");
         }
         return "Compra no dia "+ dia +":\n"+resp;
 
