@@ -4,4 +4,9 @@ public class P3L4 extends Promocao{
         int qunatidadeDiscontar = quantidade / 4;
         return (quantidade - qunatidadeDiscontar) * precoBase;
     }
+
+    @Override
+    public String tag() {
+        return "(P3L4)";
+    }
 }

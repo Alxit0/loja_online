@@ -36,15 +36,25 @@ abstract class Produto {
             temp = 10;
         else temp = 0;
 
-        Promocao promoTemp = null;
-        if (diaEsta(diasP3L4, dia)){
-            promoTemp = new P3L4();
-        }else if (diaEsta(diasPagueMenos, dia)){
-            promoTemp = new PagueMenos();
-        }else
-            return (precoUni + temp) * quantidade;
+        Promocao promoTemp = obterPromocao(dia);
+        if (promoTemp == null)return (precoUni + temp) * quantidade;
 
         return promoTemp.custoFinal(precoUni, quantidade) + temp * quantidade;
+    }
+
+    public String promo(int dia){
+        Promocao temp = obterPromocao(dia);
+        if (temp != null)return temp.tag();
+        else return "";
+    }
+
+    private Promocao obterPromocao(int diaAtual){
+        if (diaEsta(diasP3L4, diaAtual)){
+            return new P3L4();
+        }else if (diaEsta(diasPagueMenos, diaAtual)){
+            return new PagueMenos();
+        }else
+            return null;
     }
 
     private boolean diaEsta(String diasDePromo, int diaAtual){
@@ -54,14 +64,6 @@ abstract class Produto {
         int b = Integer.parseInt(temp[1]);
 
         return a <= diaAtual && diaAtual <= b;
-    }
-
-    public String promo(int dia){
-        if (diaEsta(diasP3L4, dia)){
-            return "(P3L4)";
-        }else if (diaEsta(diasPagueMenos, dia)){
-            return "(Pague Menos)";}
-        else return "";
     }
 }
     

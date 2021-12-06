@@ -5,4 +5,9 @@ public class PagueMenos extends Promocao{
 
         return (precoBase * quantidade) * (100 - percentagemDiscontar) / 100;
     }
+
+    @Override
+    public String tag() {
+        return "(Pague Menos)";
+    }
 }

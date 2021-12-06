@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Loja {
     private final int data;
     private ArrayList<Cliente> clientes;
-    private Armazem armazem;
+    private final Armazem armazem;
     private final Cliente clienteAtivo;
 
     public int getData() {return data;}
