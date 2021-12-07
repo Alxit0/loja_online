@@ -4,8 +4,12 @@
  */
 
 /**
+ * A classe ProdutoLimpeza é uma subclasse do Produto.
+ * Esta possui o metodo abstrato peso herdado da "classe mãe".
  *
- * @author 3marb
+ *
+ * @author Alexandre
+ * @author Bernardo
  */
 public class ProdutoLimpeza extends Produto {
     private int grauToxicidade;

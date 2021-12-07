@@ -1,6 +1,13 @@
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Esta classe servirá, como o nome indica, um armazém que tem 3 atributos,
+ * Estes atributos são os 3 arraylists dos diferentes tipos de produtos.
+ *
+ * @author Alexandre
+ * @author Bernardo
+ */
 public class Armazem implements Serializable{
     private final ArrayList<ProdutoAlimentar> produtosAlimentares;
     private final ArrayList<ProdutoLimpeza> produtosLimpeza;
@@ -10,6 +17,11 @@ public class Armazem implements Serializable{
     public ArrayList<ProdutoLimpeza> getProdutosLimpeza() {return produtosLimpeza;}
     public ArrayList<ProdutoMobiliario> getProdutosMobiliario() {return produtosMobiliario;}
 
+    /**
+     * Aqui forma-se a ligação entre o ficheiro dos produtos com a funcionalidade da classe Armazem.
+     * Basicamente no ficheiro com a listagem dos produtos cala linha começa com o nome do tipo de produto(ex:"Alimentar) a partir daí as restantes parselas(divididas por ";") são os atributos da do produto(sejam eles alimentares,de limpeza ou de mobiliário.
+     * @param ficheiroProdutos nome do ficheiro que contemos produtos
+     */
     public Armazem(String ficheiroProdutos) {
         produtosAlimentares = new ArrayList<>();
         produtosLimpeza = new ArrayList<>();

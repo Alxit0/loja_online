@@ -2,7 +2,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
+/*
+ * A classe Cliente,possui atributos que discrevem/irão representar os dados necessários para o cliente/utilizador efetuar o seu login.
+ * Esta classe possui vários métodos que são muito importantes para o funcionamento do programa,entre eles o adicionar compra e mostrar compra.
+ *
+ *
+ * @author Alexandre
+ * @author Bernardo
+ */
 public class Cliente implements Serializable {
     private final String email;
     private final String nome;
@@ -29,6 +36,17 @@ public class Cliente implements Serializable {
         this.compras = new ArrayList<>();
     }
 
+    /**
+     * Este método tem como função adicionar a compra efetuada(pelo cliente) a um arraylist de compras.
+     * É pedido ao utilizador que tipo de produto quer e o mesmo terá de escolher entre os 3 tipos,o utilizador irá colocar um numero entre 0 e 3.
+     * O número 1 irá abrir a listagem dos produtos alimentares, o 2 irá abrir a listagem dos produtos de limpeza, o 3 irá abrir a listagem dos produtos de limpeza e o 0 irá voltar ao menu do cliente.
+     *
+     *
+     * @param sc Pertence á classe Scanner que tem como finalidade facilitar a entrada de dados na consola, neste caso irá representar 4 valores(0 a 3) que irão ser tomados pela variável op.
+     * @param armazem Pertence á classe armazem e servirá para se poder obter os produtos que estão guardados nos arraylist´s de produtos,sejam eles alimentares,limpeza ou de mobiliário.
+     * @param data Este parâmetro corresponde á data que a compra é feita
+     * @param clienteAtivo Corresponde ao cliente que está a utilizar o programa
+     */
     public void adicionamosCompra(Scanner sc, Armazem armazem, String data, Cliente clienteAtivo){
         System.out.println(">>>>>>>>>>>>>>>>> Compra <<<<<<<<<<<<<<<<<");
         Compra temp = new Compra(clienteAtivo.getFrequencia(), data);
@@ -104,6 +122,9 @@ public class Cliente implements Serializable {
         }
     }
 
+    /**
+     * O método mostrarCompras simplesmente tem como função mostrar o histórico de compras do cliente.
+     */
     public void mostrarCompras(){
         System.out.println(">>>>>>>>>> Historico de Compras <<<<<<<<<<");
         for (Compra i: compras){
@@ -123,6 +144,14 @@ public class Cliente implements Serializable {
                 '}';
     }
 
+    /**
+     * Este método irá pedir a quantidade do produto escolhido pelo utilizador que quer comprar.
+     * Para além disso o mesmo irá verificar se o produto terá stock suficiente, se não o tiver será pedido a quantidade outra vez.
+     *
+     * @param temp Este parâmetro representa a compra que está a ser efetuada
+     * @param sc Pertence á classe Scanner que tem como finalidade facilitar a entrada de dados na consola, neste caso irá representar o valor da quantidade
+     * @param produtoEmQuestao Representa o produto ao qual é pedida a quantidade do mesmo
+     */
     private void pedirQuantidade(Compra temp, Scanner sc, Produto produtoEmQuestao){
         System.out.print("   Quantidade de "+produtoEmQuestao.getNome()+": ");
         int quant = sc.nextInt();

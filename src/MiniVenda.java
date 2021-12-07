@@ -6,8 +6,9 @@
 import java.io.Serializable;
 
 /**
- *
- * @author 3marb
+ * Esta classe é usada para calcular o valor que o cliente terá de pagar pela quantidade de um certo produto,daí se chamar "MiniVenda".
+ * @author Bernardo
+ * @author Alexandre
  */
 public class MiniVenda implements Serializable {
     private final Produto produto;
@@ -23,10 +24,19 @@ public class MiniVenda implements Serializable {
         this.quantidade = quantidade;
     }
 
+    /**
+     * Método que dá return ao valor que terá de ser pago pela quantidade de um certo produto.
+     * @param dia Este corresponde ao dia em que se realiza a compra.
+     *
+     */
     public int custoMinivenda(int dia){
         return produto.custoComQuantidade(dia, quantidade);
     }
 
+    /**
+     * Este método imprime um mini-talão da compra do produto.
+     *
+     */
     public String versaoTalao(int dia) {
         return produto.getNome()+" ------ "+ quantidade + " unidade(s) "
                 + custoMinivenda(dia) + "$ " + produto.promo(dia);

@@ -4,8 +4,10 @@
  */
 
 /**
- *
- * @author 3marb
+ * A classe ProdutoAlimentar é uma subclasse do Produto.
+ * Esta possui o metodo abstrato peso herdado da "classe mãe".
+ * @author Alexandre
+ * @author Bernardo
  */
 public class ProdutoAlimentar extends Produto {
     private int numCalorias;

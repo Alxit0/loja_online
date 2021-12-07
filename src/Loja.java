@@ -2,6 +2,12 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A classe loja terá como finalidade a conecção dos ficheiro(que terá a listagem dos produtos) e do ficheiro (onde vai ser guardado os dados dos clientes e as suas compras) com o resto do programa
+ *
+ * @author Bernardo
+ * @author Alexandre
+ */
 public class Loja {
     private final String data;
     private ArrayList<Cliente> clientes;
@@ -16,6 +22,10 @@ public class Loja {
         this.clienteAtivo = login();
     }
 
+    /**
+     * Esta função irá criar o menu do cliente onde será pedido ao mesmo que tipo de ação quer efetuar na loja.
+     * A ação irá ser escolhida conforme o número que o utilizador colocar na consola, podendo esta ação ser "Realizar compra"[1], "Consultar histórico de compras"[2] ou "sair da loja"[0];
+     */
     public void menu(){
         Scanner sc = new Scanner(System.in);
         System.out.println("=============== "+ clienteAtivo.getNome() + " ===============");
@@ -45,6 +55,10 @@ public class Loja {
         guardarEmFicheiro(produtosFile);
     }
 
+    /**
+     * O método em causa irá guardar os dados dos clientes e dos produtos nos respetivos ficheiros.
+     * @param nomeFicherio Ficheiro onde se irá guardar os dados que poderá tomar a forma do ficheiroClientes ou do ficheiroProdutos.
+     */
     private void guardarEmFicheiro(String nomeFicherio){
         File f = new File(nomeFicherio+".dat");
         try {
@@ -99,6 +113,13 @@ public class Loja {
             importarClientesTexto(ficheiroClientes);
         }
     }
+
+    /**
+     * O método importarClientesTexto é constituido por uma série de processos que irão "partir" o texto no ficheiro linha a linha,nestes processos de parsing iremos obter os dados do cliente.
+     * Aqui também definimos a regularidade do cliente, decidimos portanto que os clientes que possuem mais que 2 compras serão clientes regulares.
+     *
+     * @param ficheiroClientes Ficheiro onde se guarda os dados dos clientes.
+     */
     private void importarClientesTexto(String ficheiroClientes){
         clientes = new ArrayList<>();
         File f = new File(ficheiroClientes);
@@ -132,7 +153,7 @@ public class Loja {
                         }else if (pointer == 1)
                             compraTemp.adicionarMinivenda(armazem.getProdutosLimpeza().get(index), quant);
                         else
-                            compraTemp.adicionarMinivenda(armazem.getProdutosLimpeza().get(index), quant);
+                            compraTemp.adicionarMinivenda(armazem.getProdutosMobiliario().get(index), quant);
                     }
                     compras.add(compraTemp);
 
@@ -151,6 +172,11 @@ public class Loja {
         }
     }
 
+    /**
+     * O método login, como o nome indica irá pedira ao utilizador para fazer o login, se o cliente não tiver na base de dados pedirá-se ao mesmo se irá querer criar um "novo cliente".
+     * Ao criar um novo cliente, os dados do mesmo serão guardados na base de dados.
+     *
+     */
     private Cliente login(){
         Scanner sc = new Scanner(System.in);
 
@@ -187,6 +213,11 @@ public class Loja {
             return novo_cliente;
         }
     }
+
+    /**
+     * Este método é usado no método do login e basicamente iráprocurar se o cliente existe.
+     *
+     */
     private Cliente procurarCliente(String email){
         for(Cliente i: clientes){
             if (i.getEmail().equals(email)){
