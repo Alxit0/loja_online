@@ -1,7 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Cliente {
+
+public class Cliente implements Serializable {
     private final String email;
     private final String nome;
     private final String morada;
@@ -46,7 +48,7 @@ public class Cliente {
             int op = sc.nextInt();
             if (op == 0)break;
             else if (op == 1){
-                System.out.println("------------- Alimentare -------------");
+                System.out.println("------------- Alimentar -------------");
                 ArrayList<ProdutoAlimentar> listaTemp = armazem.getProdutosAlimentares();
                 for (int i = 0; i < listaTemp.size(); i++) {
                     ProdutoAlimentar prodTemp= listaTemp.get(i);
@@ -58,17 +60,7 @@ public class Cliente {
                     int item = sc.nextInt();
                     if (item == 0)break;
                     Produto produtoEmQuestao = armazem.getProdutosAlimentares().get(item - 1);
-                    System.out.print("   Quantidade de "+produtoEmQuestao.getNome()+": ");
-                    int quant = sc.nextInt();
-
-                    while (produtoEmQuestao.getStockExistente() < quant){
-                        System.out.println("   >> Stock insuficiente");
-                        System.out.print("   Quantidade de "+produtoEmQuestao.getNome()+": ");
-                        quant = sc.nextInt();
-                    }
-                    produtoEmQuestao.setStockExistente(produtoEmQuestao.getStockExistente() - quant);
-
-                    temp.adicionarMinivenda(produtoEmQuestao, quant);
+                    pedirQuantidade(temp, sc, produtoEmQuestao);
                 }
             }
             else if (op == 2){
@@ -83,17 +75,7 @@ public class Cliente {
                     int item = sc.nextInt();
                     if (item == 0)break;
                     Produto produtoEmQuestao = armazem.getProdutosLimpeza().get(item - 1);
-                    System.out.print("   Quantidade de "+produtoEmQuestao.getNome()+": ");
-                    int quant = sc.nextInt();
-
-                    while (produtoEmQuestao.getStockExistente() < quant){
-                        System.out.println("   >> Stock insuficiente");
-                        System.out.print("   Quantidade de "+produtoEmQuestao.getNome()+": ");
-                        quant = sc.nextInt();
-                    }
-                    produtoEmQuestao.setStockExistente(produtoEmQuestao.getStockExistente() - quant);
-
-                    temp.adicionarMinivenda(produtoEmQuestao, quant);
+                    pedirQuantidade(temp, sc, produtoEmQuestao);
                 }
             }
             else if (op == 3){
@@ -108,17 +90,7 @@ public class Cliente {
                     int item = sc.nextInt();
                     if (item == 0)break;
                     Produto produtoEmQuestao = armazem.getProdutosMobiliario().get(item - 1);
-                    System.out.print("   Quantidade de "+produtoEmQuestao.getNome()+": ");
-                    int quant = sc.nextInt();
-
-                    while (produtoEmQuestao.getStockExistente() < quant){
-                        System.out.println("   >> Stock insuficiente");
-                        System.out.print("   Quantidade de "+produtoEmQuestao.getNome()+": ");
-                        quant = sc.nextInt();
-                    }
-                    produtoEmQuestao.setStockExistente(produtoEmQuestao.getStockExistente() - quant);
-
-                    temp.adicionarMinivenda(produtoEmQuestao, quant);
+                    pedirQuantidade(temp, sc, produtoEmQuestao);
                 }
             }
         }
@@ -149,5 +121,19 @@ public class Cliente {
                 ", dataNascimento='" + dataNascimento + '\'' +
                 ", frequencia='" + frequencia + '\'' +
                 '}';
+    }
+
+    private void pedirQuantidade(Compra temp, Scanner sc, Produto produtoEmQuestao){
+        System.out.print("   Quantidade de "+produtoEmQuestao.getNome()+": ");
+        int quant = sc.nextInt();
+
+        while (produtoEmQuestao.getStockExistente() < quant){
+            System.out.println("   >> Stock insuficiente");
+            System.out.print("   Quantidade de "+produtoEmQuestao.getNome()+": ");
+            quant = sc.nextInt();
+        }
+        produtoEmQuestao.setStockExistente(produtoEmQuestao.getStockExistente() - quant);
+
+        temp.adicionarMinivenda(produtoEmQuestao, quant);
     }
 }

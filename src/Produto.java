@@ -3,11 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
+import java.io.Serializable;
+
 /**
  *
  * @author 3marb
  */
-abstract class Produto {
+abstract class Produto implements Serializable {
     private final int identificador;
     private final String nome;
     private final int precoUni;

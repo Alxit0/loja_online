@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 
-public class Armazem {
+public class Armazem implements Serializable{
     private final ArrayList<ProdutoAlimentar> produtosAlimentares;
     private final ArrayList<ProdutoLimpeza> produtosLimpeza;
     private final ArrayList<ProdutoMobiliario> produtosMobiliario;

@@ -3,11 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
+import java.io.Serializable;
+
 /**
  *
  * @author 3marb
  */
-public class MiniVenda {
+public class MiniVenda implements Serializable {
     private final Produto produto;
     private int quantidade;
 

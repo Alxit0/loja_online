@@ -1,22 +1,17 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Loja {
     private final String data;
     private ArrayList<Cliente> clientes;
-    private final Armazem armazem;
+    private Armazem armazem;
     private final Cliente clienteAtivo;
 
-    public String getData() {return data;}
-    public Cliente getClienteAtivo() {return clienteAtivo;}
 
     public Loja(String data, String ficheiroClientes, String ficheiroProdutos) {
         this.data = data;
-        this.armazem = new Armazem(ficheiroProdutos);
+        importarArmazem(ficheiroProdutos);
         importarClientes(ficheiroClientes);
         this.clienteAtivo = login();
     }
@@ -44,7 +39,67 @@ public class Loja {
         }
     }
 
+
+    public void exit(String clientesFile, String produtosFile){
+        guardarEmFicheiro(clientesFile);
+        guardarEmFicheiro(produtosFile);
+    }
+
+    private void guardarEmFicheiro(String nomeFicherio){
+        File f = new File(nomeFicherio+".dat");
+        try {
+            FileOutputStream fos = new FileOutputStream(f);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+            if (nomeFicherio.equals("ficheiroClientes"))
+                oos.writeObject(clientes);
+            else
+                oos.writeObject(armazem);
+
+            oos.close();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("ERROR: file not found!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void importarArmazem(String ficheiroProdutos){
+        try {
+            File f = new File(ficheiroProdutos+".dat");
+
+            FileInputStream fis = new FileInputStream(f);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+
+
+            this.armazem = (Armazem) ois.readObject();
+
+            ois.close();
+            fis.close();
+        }catch (Exception a){
+            this.armazem = new Armazem(ficheiroProdutos);
+        }
+
+    }
+
+    @SuppressWarnings("unchecked")
     private void importarClientes(String ficheiroClientes){
+        try{
+            File f = new File(ficheiroClientes+".dat");
+
+            FileInputStream fis = new FileInputStream(f);
+            System.out.println("Object");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+
+            clientes = (ArrayList<Cliente>) ois.readObject();
+
+        } catch (Exception a) {
+            importarClientesTexto(ficheiroClientes);
+        }
+    }
+    private void importarClientesTexto(String ficheiroClientes){
         clientes = new ArrayList<>();
         File f = new File(ficheiroClientes);
         try {
@@ -132,7 +187,6 @@ public class Loja {
             return novo_cliente;
         }
     }
-
     private Cliente procurarCliente(String email){
         for(Cliente i: clientes){
             if (i.getEmail().equals(email)){
@@ -141,5 +195,4 @@ public class Loja {
         }
         return null;
     }
-
 }
