@@ -106,8 +106,12 @@ public class Cliente implements Serializable {
      */
     public void mostrarCompras(){
         System.out.println(">>>>>>>>>> Historico de Compras <<<<<<<<<<");
-        for (Compra i: compras){
-            System.out.println(i);
+        if (compras.size() == 0) {
+            System.out.println("Sem compras");
+        }else{
+            for (Compra i: compras){
+                System.out.println(i);
+            }
         }
         System.out.println(">>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<");
 

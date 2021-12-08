@@ -175,7 +175,11 @@ public class Loja {
                 clienteTemp.setFrequencia("normal"); // porque atualmente ele tem 0 compras
 
                 // iterar pelas Compras
-
+                if (temp.length == 5){
+                    clienteTemp.setCompras(compras);
+                    clientes.add(clienteTemp);
+                    return;
+                }
                 for (String compra: temp[5].split("&")) {
 
                     Compra compraTemp = new Compra(clienteTemp.getFrequencia(), compra.split("%")[0]);
