@@ -33,10 +33,7 @@ public class Compra implements Serializable {
             precoFinal += i.custoMinivenda(dia);
         }
 
-        if (frequencia.equals("normal") && precoFinal < 40)
-            precoFinal += 15;
-        else if (frequencia.equals("regular"))
-            precoFinal += 20;
+        precoFinal += precoTransporte(precoFinal);
 
         return precoFinal;
     }
@@ -58,6 +55,22 @@ public class Compra implements Serializable {
         if (chek) miniVendas.add(new MiniVenda(prod, quant));
     }
 
+    public int precoTransporte(int precoFinal){
+        int temp = 0;
+        for(MiniVenda i: miniVendas){
+            if (i.getProduto().peso() > 15){
+                temp += 10 * i.getQuantidade();
+            }
+        }
+
+
+        if (frequencia.equals("regular") && precoFinal < 40)
+            return  15 + temp;
+        else if (frequencia.equals("normal"))
+            return  20 + temp;
+        return temp;
+    }
+
     @Override
     public String toString() {
         /*
@@ -75,7 +88,8 @@ public class Compra implements Serializable {
         for (MiniVenda i: miniVendas){
             resp.append(i.versaoTalao(dia)).append("\n\t");
         }
-        return "Compra no dia "+ data +":\n\t"+resp;
+        resp.append("Transporte ------ ").append(precoTransporte(precoCompra())).append("$");
+        return "Compra no dia "+ data +":\n\t"+resp+'\n';
 
     }
 }

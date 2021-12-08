@@ -51,15 +51,10 @@ abstract class Produto implements Serializable {
      * @return custo do produto em certa quantidade
      */
     public int custoComQuantidade(int dia, int quantidade){
-        int temp;
-        if (peso() > 15)
-            temp = 10;
-        else temp = 0;
-
         Promocao promoTemp = obterPromocao(dia);
-        if (promoTemp == null)return (precoUni + temp) * quantidade;
+        if (promoTemp == null)return precoUni * quantidade;
 
-        return promoTemp.custoFinal(precoUni, quantidade) + temp * quantidade;
+        return promoTemp.custoFinal(precoUni, quantidade);
     }
 
     /**

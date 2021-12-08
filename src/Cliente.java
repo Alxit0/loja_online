@@ -61,7 +61,7 @@ public class Cliente implements Serializable {
              opcao:
              */
             System.out.println("Tipo de produtos:");
-            System.out.println("\t1 > Alimetares\n\t2 > Limpeza\n\t3 > Mobiliario\n\t0 > Sair");
+            System.out.println("\t1 > Alimetares\n\t2 > Limpeza\n\t3 > Mobiliario\n\t4 > Anular Compra\n\t0 > Sair");
             System.out.print("Opção: ");
             int op = sc.nextInt();
             if (op == 0)break;
@@ -76,11 +76,24 @@ public class Cliente implements Serializable {
             else if (op == 3){
                 System.out.println("-------------- Mobiliario --------------");
                 menuProdutos(temp, sc, armazem.getProdutosMobiliario());
+            }else if (op == 4){
+                System.out.println("Compra anulada com sucesso!");
+                System.out.println(">>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<");
+                return;
             }
         }
-        System.out.println("Total: "+temp.precoCompra()+"$");
-        System.out.println(">>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<");
+        int precoFinal = temp.precoCompra();
+        int precoTransporte = temp.precoTransporte(precoFinal);
 
+        // caso o carrinho esteja vazio nao faz sentido guardar a compra
+        if (precoFinal == precoTransporte){
+            System.out.println("Compra anula.");
+            System.out.println(">>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<");
+            return;
+        }
+        System.out.println("Transporte: " + precoTransporte + "$");
+        System.out.println("Total: "+precoFinal+"$");
+        System.out.println(">>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<");
         compras.add(temp);
 
         if (compras.size() > 2){
@@ -96,6 +109,8 @@ public class Cliente implements Serializable {
         for (Compra i: compras){
             System.out.println(i);
         }
+        System.out.println(">>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<");
+
     }
 
     /**
@@ -108,9 +123,10 @@ public class Cliente implements Serializable {
     private void menuProdutos(Compra temp, Scanner sc, ArrayList<Produto> produtos){
         for (int i = 0; i < produtos.size(); i++) {
             Produto prodTemp= produtos.get(i);
+            System.out.print("["+ (i+1) +"] "+prodTemp.getNome()+ "--> "+prodTemp.getPrecoUni());
             if (prodTemp.getStockExistente() == 0)
-                System.out.print("(Fora de stock)");
-            System.out.println("["+ (i+1) +"] "+prodTemp.getNome()+ "--> "+prodTemp.getPrecoUni());
+                System.out.println(" (Fora de stock)");
+            else System.out.print("\n");
         }
         System.out.println("[0] Voltar");
         while (true){
@@ -139,6 +155,8 @@ public class Cliente implements Serializable {
             System.out.print("   Quantidade de "+produtoEmQuestao.getNome()+": ");
             quant = sc.nextInt();
         }
+        // caso o utilizador se tenha enganado na tecla pode pedir 0 do produto
+        if (quant == 0)return;
         produtoEmQuestao.setStockExistente(produtoEmQuestao.getStockExistente() - quant);
 
         temp.adicionarMinivenda(produtoEmQuestao, quant);
