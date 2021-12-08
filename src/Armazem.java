@@ -9,13 +9,13 @@ import java.util.ArrayList;
  * @author Bernardo
  */
 public class Armazem implements Serializable{
-    private final ArrayList<ProdutoAlimentar> produtosAlimentares;
-    private final ArrayList<ProdutoLimpeza> produtosLimpeza;
-    private final ArrayList<ProdutoMobiliario> produtosMobiliario;
+    private final ArrayList<Produto> produtosAlimentares;
+    private final ArrayList<Produto> produtosLimpeza;
+    private final ArrayList<Produto> produtosMobiliario;
 
-    public ArrayList<ProdutoAlimentar> getProdutosAlimentares() {return produtosAlimentares;}
-    public ArrayList<ProdutoLimpeza> getProdutosLimpeza() {return produtosLimpeza;}
-    public ArrayList<ProdutoMobiliario> getProdutosMobiliario() {return produtosMobiliario;}
+    public ArrayList<Produto> getProdutosAlimentares() {return produtosAlimentares;}
+    public ArrayList<Produto> getProdutosLimpeza() {return produtosLimpeza;}
+    public ArrayList<Produto> getProdutosMobiliario() {return produtosMobiliario;}
 
     /**
      * Aqui forma-se a ligação entre o ficheiro dos produtos com a funcionalidade da classe Armazem.

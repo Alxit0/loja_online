@@ -67,51 +67,15 @@ public class Cliente implements Serializable {
             if (op == 0)break;
             else if (op == 1){
                 System.out.println("------------- Alimentar -------------");
-                ArrayList<ProdutoAlimentar> listaTemp = armazem.getProdutosAlimentares();
-                for (int i = 0; i < listaTemp.size(); i++) {
-                    ProdutoAlimentar prodTemp= listaTemp.get(i);
-                    if (prodTemp.getStockExistente() == 0)
-                        System.out.print("(Fora de stock)");
-                    System.out.println("["+ (i+1) +"] "+prodTemp.getNome()+ "--> "+prodTemp.getPrecoUni());
-                }
-                System.out.println("[0] Voltar");
-                while (true){
-                    System.out.print(">> Tecla: ");
-                    int item = sc.nextInt();
-                    if (item == 0)break;
-                    Produto produtoEmQuestao = armazem.getProdutosAlimentares().get(item - 1);
-                    pedirQuantidade(temp, sc, produtoEmQuestao);
-                }
+                menuProdutos(temp, sc, armazem.getProdutosAlimentares());
             }
             else if (op == 2){
                 System.out.println("-------------- Limpeza --------------");
-                ArrayList<ProdutoLimpeza> listaTemp = armazem.getProdutosLimpeza();
-                for (int i = 0; i < listaTemp.size(); i++) {
-                    ProdutoLimpeza prodTemp= listaTemp.get(i);
-                    System.out.println("["+ (i+1) +"] "+prodTemp.getNome()+ "--> "+prodTemp.getPrecoUni());
-                }
-                while (true){
-                    System.out.print(">> Tecla: ");
-                    int item = sc.nextInt();
-                    if (item == 0)break;
-                    Produto produtoEmQuestao = armazem.getProdutosLimpeza().get(item - 1);
-                    pedirQuantidade(temp, sc, produtoEmQuestao);
-                }
+                menuProdutos(temp, sc, armazem.getProdutosLimpeza());
             }
             else if (op == 3){
                 System.out.println("-------------- Mobiliario --------------");
-                ArrayList<ProdutoMobiliario> listaTemp = armazem.getProdutosMobiliario();
-                for (int i = 0; i < listaTemp.size(); i++) {
-                    ProdutoMobiliario prodTemp= listaTemp.get(i);
-                    System.out.println("["+ (i+1) +"] "+prodTemp.getNome()+ "--> "+prodTemp.getPrecoUni());
-                }
-                while (true){
-                    System.out.print(">> Tecla: ");
-                    int item = sc.nextInt();
-                    if (item == 0)break;
-                    Produto produtoEmQuestao = armazem.getProdutosMobiliario().get(item - 1);
-                    pedirQuantidade(temp, sc, produtoEmQuestao);
-                }
+                menuProdutos(temp, sc, armazem.getProdutosMobiliario());
             }
         }
         System.out.println("Total: "+temp.precoCompra()+"$");
@@ -131,6 +95,30 @@ public class Cliente implements Serializable {
         System.out.println(">>>>>>>>>> Historico de Compras <<<<<<<<<<");
         for (Compra i: compras){
             System.out.println(i);
+        }
+    }
+
+    /**
+     * Sub menu onde é passado um ArrayList com os produtos que podem ser adicionados ao carrinho
+     *
+     * @param temp compra temporaria na qual vamos submeter os produtos e as respetivas qunatidades
+     * @param sc scaner para ler o input do utilizador
+     * @param produtos lista de produtos que serao visiveis ao utilizador.
+     */
+    private void menuProdutos(Compra temp, Scanner sc, ArrayList<Produto> produtos){
+        for (int i = 0; i < produtos.size(); i++) {
+            Produto prodTemp= produtos.get(i);
+            if (prodTemp.getStockExistente() == 0)
+                System.out.print("(Fora de stock)");
+            System.out.println("["+ (i+1) +"] "+prodTemp.getNome()+ "--> "+prodTemp.getPrecoUni());
+        }
+        System.out.println("[0] Voltar");
+        while (true){
+            System.out.print(">> Tecla: ");
+            int item = sc.nextInt();
+            if (item == 0)break;
+            Produto produtoEmQuestao = produtos.get(item - 1);
+            pedirQuantidade(temp, sc, produtoEmQuestao);
         }
     }
 
