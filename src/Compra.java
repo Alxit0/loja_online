@@ -1,6 +1,5 @@
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Classe compra onde é guardada a informacao de uma compra que um cliente tenha feito.
@@ -34,9 +33,9 @@ public class Compra implements Serializable {
             precoFinal += i.custoMinivenda(dia);
         }
 
-        if (frequencia.equals("Frequente") && precoFinal < 40)
+        if (frequencia.equals("normal") && precoFinal < 40)
             precoFinal += 15;
-        else if (frequencia.equals("Regular"))
+        else if (frequencia.equals("regular"))
             precoFinal += 20;
 
         return precoFinal;

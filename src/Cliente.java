@@ -70,6 +70,8 @@ public class Cliente implements Serializable {
                 ArrayList<ProdutoAlimentar> listaTemp = armazem.getProdutosAlimentares();
                 for (int i = 0; i < listaTemp.size(); i++) {
                     ProdutoAlimentar prodTemp= listaTemp.get(i);
+                    if (prodTemp.getStockExistente() == 0)
+                        System.out.print("(Fora de stock)");
                     System.out.println("["+ (i+1) +"] "+prodTemp.getNome()+ "--> "+prodTemp.getPrecoUni());
                 }
                 System.out.println("[0] Voltar");

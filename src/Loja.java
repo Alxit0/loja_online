@@ -36,7 +36,6 @@ public class Loja {
             System.out.println("\t0 - sair");
             System.out.print("Opção: ");
             int op = sc.nextInt();
-            //String op = sc.nextLine();
             //System.out.println(op);
 
             if (op == 0)break;
