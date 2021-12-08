@@ -1,6 +1,14 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Scanner;
 
+/**
+ * Classe compra onde é guardada a informacao de uma compra que um cliente tenha feito.
+ * Assim como a sua representação e calculos do seu valor.
+ *
+ * @author Alexandre
+ * @author Bernardo
+ */
 public class Compra implements Serializable {
     private final String frequencia;
     private final ArrayList<MiniVenda> miniVendas;
@@ -14,6 +22,11 @@ public class Compra implements Serializable {
         this.dia = Integer.parseInt(data.split("-")[0]);
     }
 
+    /**
+     * Funcao que quando chamada itera por uma lista de MiniVenda e calcula o seu valor final ja com os descontos
+     *
+     * @return preco final da compra
+     */
     public int precoCompra(){
         int precoFinal = 0;
 
@@ -29,6 +42,12 @@ public class Compra implements Serializable {
         return precoFinal;
     }
 
+    /**
+     * Metodo para adicionar MiniVendas á compra.
+     *
+     * @param prod produto que se pretende adicionar á compra
+     * @param quant qunatidade do produto que se pretende adicionar á compra
+     */
     public void adicionarMinivenda(Produto prod, int quant){
         boolean chek = true;
         for(MiniVenda i: miniVendas){

@@ -12,15 +12,17 @@ public abstract class Promocao implements Serializable {
 
     /**
      * O método custoFinal calcula o custo do produto já descontado.
-     * @param precoBase representa o custo do produto sem desconto
+     * @param precoBase representa o custo do produto sem desconto.
+     * @param quantidade representa a qunatidade de um produto.
      *
-     *
+     * @return valor da qunatidade de um produto com o disconto.
      */
     public abstract int custoFinal(int precoBase, int quantidade);
 
     /**
-     * O método tag irá dar return ao nome da promoção;
+     * O método "tag" irá dar return ao nome da promoção.
      *
+     * @return string que nos diz o tipo de promucao aplicavel.
      */
     public abstract String tag();
 }

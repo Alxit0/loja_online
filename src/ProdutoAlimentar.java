@@ -10,8 +10,8 @@
  * @author Bernardo
  */
 public class ProdutoAlimentar extends Produto {
-    private int numCalorias;
-    private int percentagemGordura;
+    private final int numCalorias;
+    private final int percentagemGordura;
 
     public ProdutoAlimentar(int identificador, String nome, int precoUni, int stockExistente, String diasP3L4,
                             String diasPagueMenos, int numCalorias, int percentagemGordura) {
@@ -25,4 +25,11 @@ public class ProdutoAlimentar extends Produto {
         return 0; 
     }
 
+    @Override
+    public String toString() {
+        return "ProdutoAlimentar{" +
+                "numCalorias=" + numCalorias +
+                ", percentagemGordura=" + percentagemGordura +
+                '}';
+    }
 }

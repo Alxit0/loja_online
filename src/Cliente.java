@@ -2,8 +2,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/*
- * A classe Cliente,possui atributos que discrevem/irão representar os dados necessários para o cliente/utilizador efetuar o seu login.
+/**
+ * A classe Cliente, possui atributos que discrevem/irão representar os dados necessários para o cliente/utilizador efetuar o seu login.
  * Esta classe possui vários métodos que são muito importantes para o funcionamento do programa,entre eles o adicionar compra e mostrar compra.
  *
  *
@@ -132,18 +132,6 @@ public class Cliente implements Serializable {
         }
     }
 
-    @Override
-    public String toString() {
-        return "Cliente{" +
-                "email='" + email + '\'' +
-                ", nome='" + nome + '\'' +
-                ", morada='" + morada + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", dataNascimento='" + dataNascimento + '\'' +
-                ", frequencia='" + frequencia + '\'' +
-                '}';
-    }
-
     /**
      * Este método irá pedir a quantidade do produto escolhido pelo utilizador que quer comprar.
      * Para além disso o mesmo irá verificar se o produto terá stock suficiente, se não o tiver será pedido a quantidade outra vez.
@@ -164,5 +152,17 @@ public class Cliente implements Serializable {
         produtoEmQuestao.setStockExistente(produtoEmQuestao.getStockExistente() - quant);
 
         temp.adicionarMinivenda(produtoEmQuestao, quant);
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "email='" + email + '\'' +
+                ", nome='" + nome + '\'' +
+                ", morada='" + morada + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", dataNascimento='" + dataNascimento + '\'' +
+                ", frequencia='" + frequencia + '\'' +
+                '}';
     }
 }

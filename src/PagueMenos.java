@@ -1,5 +1,5 @@
 /**
- * A classe PagueMenos é uma subclasse de Promocao,sendo esta uma classe abstrata a sua subclasse irá dar override aos métodos abstratos.
+ * A classe PagueMenos é uma subclasse de Promocao, sendo esta uma classe abstrata a sua subclasse irá dar override aos métodos abstratos.
  * Esta classe irá representar a promoção pague menos que consiste no decréscimo do custo por cada unidade adicional podendo atingir o desconto máximo(50%).
  *
  *

@@ -1,6 +1,6 @@
 /**
- * A classe P3L4 é uma subclasse de Promocao,sendo esta uma classe abstrata a sua subclasse irá dar override aos métodos abstratos.
- * Esta classe representa as promoções pague 3 leve 4.
+ * A classe P3L4 é uma subclasse de Promocao, sendo esta uma classe abstrata a sua subclasse irá dar override aos métodos abstratos.
+ * Esta classe representa as promoções "pague 3 leve 4".
  *
  * @author Alexandre
  * @author Bernardo

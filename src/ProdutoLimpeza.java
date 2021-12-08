@@ -12,7 +12,7 @@
  * @author Bernardo
  */
 public class ProdutoLimpeza extends Produto {
-    private int grauToxicidade;
+    private final int grauToxicidade;
 
     public ProdutoLimpeza(int identificador, String nome, int precoUni, int stockExistente, String diasP3L4,
                           String diasPagueMenos, int grauToxicidade) {
@@ -23,7 +23,13 @@ public class ProdutoLimpeza extends Produto {
     public double peso(){
         return 0; 
     }
-    
+
+    @Override
+    public String toString() {
+        return "ProdutoLimpeza{" +
+                "grauToxicidade=" + grauToxicidade +
+                '}';
+    }
 }
 
 

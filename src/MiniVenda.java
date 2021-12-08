@@ -26,8 +26,9 @@ public class MiniVenda implements Serializable {
 
     /**
      * Método que dá return ao valor que terá de ser pago pela quantidade de um certo produto.
-     * @param dia Este corresponde ao dia em que se realiza a compra.
      *
+     * @param dia Este corresponde ao dia em que se realiza a compra.
+     * @return valor da minivenda ja com as promucoes referentes ao dia aplicaveis
      */
     public int custoMinivenda(int dia){
         return produto.custoComQuantidade(dia, quantidade);
@@ -36,6 +37,8 @@ public class MiniVenda implements Serializable {
     /**
      * Este método imprime um mini-talão da compra do produto.
      *
+     * @param dia Este corresponde ao dia em que se realiza a compra.
+     * @return Representacao de uma minivenda no talao
      */
     public String versaoTalao(int dia) {
         return produto.getNome()+" ------ "+ quantidade + " unidade(s) "

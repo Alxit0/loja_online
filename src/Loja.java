@@ -49,7 +49,12 @@ public class Loja {
         }
     }
 
-
+    /**
+     * Metodo chamado no final do program para guardar a base de daos em ficherios de objetos.
+     *
+     * @param clientesFile nome do ficehiro onde esta guardados os dados dos clientes
+     * @param produtosFile nome do ficehiro onde esta guardados os dados dos produtos
+     */
     public void exit(String clientesFile, String produtosFile){
         guardarEmFicheiro(clientesFile);
         guardarEmFicheiro(produtosFile);
@@ -79,7 +84,13 @@ public class Loja {
         }
     }
 
-
+    /**
+     * Metodo para importar os produtos de um ficehiro.
+     * Primeiramente é feita a busca por um ficheiro de objetos.
+     * Caso esta falhe, é entao feito o parsing de um ficheiro de texto com a informacao dos produtos.
+     *
+     * @param ficheiroProdutos nome do ficehiro onde esta guardados os dados dos produtos
+     */
     private void importarArmazem(String ficheiroProdutos){
         try {
             File f = new File(ficheiroProdutos+".dat");
@@ -98,6 +109,13 @@ public class Loja {
 
     }
 
+    /**
+     * Metodo para importar os clientes de um ficehiro.
+     * Primeiramente é feita a busca por um ficheiro de objetos.
+     * Caso esta falhe, é entao feito o parsing de um ficheiro de texto com a informacao dos clientes.
+     *
+     * @param ficheiroClientes nome do ficehiro onde esta guardados os dados dos clientes
+     */
     @SuppressWarnings("unchecked")
     private void importarClientes(String ficheiroClientes){
         try{
@@ -115,13 +133,33 @@ public class Loja {
     }
 
     /**
-     * O método importarClientesTexto é constituido por uma série de processos que irão "partir" o texto no ficheiro linha a linha,nestes processos de parsing iremos obter os dados do cliente.
-     * Aqui também definimos a regularidade do cliente, decidimos portanto que os clientes que possuem mais que 2 compras serão clientes regulares.
+     * O método importarClientesTexto é constituido por uma série de processos que irão "partir" o texto no ficheiro
+     * linha a linha,nestes processos de parsing iremos obter os dados do cliente.
+     * Aqui também definimos a regularidade do cliente onde os clientes que possuem mais que 2 compras serão clientes regulares.
      *
      * @param ficheiroClientes Ficheiro onde se guarda os dados dos clientes.
      */
     private void importarClientesTexto(String ficheiroClientes){
-        clientes = new ArrayList<>();
+        /*
+            Forma de Cliente:
+            ==> email ; nome ; morada ; telefone ; data de nascimento; compras
+
+            Forma de compras:
+            ==> compra & compra & compra & compra $ ...
+
+            Forma de compra:
+            ==> dataCompra % minivenda @ minivemda @ minivenda @ ...
+
+            Forma de minivenda:
+            ==> posicaoArmazem ! quantidade
+
+            Forma da posicaoArmazem:
+            ==> Digito de tipo de Produto + index na lista correspondente
+                Nota: 012 -> lista 0, posicao 12
+                      21  -> lista 2, posicao 1
+         */
+        clientes = new ArrayList<>(); // inicializar clientes
+
         File f = new File(ficheiroClientes);
         try {
             FileReader fr = new FileReader(f);
@@ -130,23 +168,28 @@ public class Loja {
             String line;
             while ((line = br.readLine()) != null){
                 String[] temp = line.split(";");
+                //############################### email,   nome,    morada, telefone, dataNascimento
                 Cliente clienteTemp = new Cliente(temp[0], temp[1], temp[2], temp[3], temp[4]);
 
                 // iniciar array de compras
                 ArrayList<Compra> compras = new ArrayList<>();
-                clienteTemp.setFrequencia("");
-                for (String j: temp[5].split("&")) {
+                clienteTemp.setFrequencia("normal"); // porque atualmente ele tem 0 compras
 
-                    Compra compraTemp = new Compra(clienteTemp.getFrequencia(), j.split("%")[0]);
+                // iterar pelas Compras
+                for (String compra: temp[5].split("&")) {
+
+                    Compra compraTemp = new Compra(clienteTemp.getFrequencia(), compra.split("%")[0]);
 
                     // iterar miniVendas
-                    for(String i: j.split("%")[1].split("@")){
-                        int quant = Integer.parseInt(i.split("!")[0]);
+                    for(String miniVenda: compra.split("%")[1].split("@")){
+                        // Forma de minivenda: posicaoArmazem ! quantidade
 
-                        int id = Integer.parseInt(i.split("!")[0]);
-                        int power = (int) Math.pow(10, (int) Math.log10(id));
-                        int pointer = id / power;
-                        int index = id % power;
+                        int quant = Integer.parseInt(miniVenda.split("!")[1]);
+
+                        int id = Integer.parseInt(miniVenda.split("!")[0]);
+                        int power = (int) Math.pow(10, (int) Math.log10(id)); // Obter o 'tamanho do numero'
+                        int pointer = id / power; // obter o primeiro digito (lista pointer)
+                        int index = id % power; // obter o tamanho resto do numero
 
                         if (pointer == 0){
                             compraTemp.adicionarMinivenda(armazem.getProdutosAlimentares().get(index), quant);
@@ -155,15 +198,15 @@ public class Loja {
                         else
                             compraTemp.adicionarMinivenda(armazem.getProdutosMobiliario().get(index), quant);
                     }
-                    compras.add(compraTemp);
+                    compras.add(compraTemp); // adicionar a compra
 
+                    // atualizar a frequencia do cliente em questao
                     if (compras.size() > 2){
                         clienteTemp.setFrequencia("regular");
                     }
                 }
                 clienteTemp.setCompras(compras);
-                clientes.add(clienteTemp);
-
+                clientes.add(clienteTemp); // adicionar clinete á base de dados
             }
             br.close();
             fr.close();
@@ -176,54 +219,50 @@ public class Loja {
      * O método login, como o nome indica irá pedira ao utilizador para fazer o login, se o cliente não tiver na base de dados pedirá-se ao mesmo se irá querer criar um "novo cliente".
      * Ao criar um novo cliente, os dados do mesmo serão guardados na base de dados.
      *
+     * @return um cliente, seja um ja existente caso o mesmo exista na base de dados, ou um novo cliente caso contrario.
      */
     private Cliente login(){
         Scanner sc = new Scanner(System.in);
 
         System.out.print("login: ");
         String emailCliente = sc.nextLine();
-        Cliente temp = procurarCliente(emailCliente);
 
-        if (temp != null){
-            System.out.println("Login bem sucedido!");
-            return temp;
-        }else{
-            System.out.println("Cliente nã encontrado.");
-            System.out.print("Criar novo cliente (y/n): ");
-            String op = sc.nextLine();
-            if (op.equals("n")){
-                return login();
-            }
-
-
-            System.out.print("Nome: ");
-            String nome = sc.nextLine();
-
-            System.out.print("Morada: ");
-            String morada = sc.nextLine();
-
-            System.out.print("Telefone: ");
-            String telefone = sc.nextLine();
-
-            System.out.print("Data de Nascimento: ");
-            String dataNas = sc.nextLine();
-
-            Cliente novo_cliente = new Cliente(emailCliente,nome,morada,telefone,dataNas);
-            clientes.add(novo_cliente);
-            return novo_cliente;
-        }
-    }
-
-    /**
-     * Este método é usado no método do login e basicamente iráprocurar se o cliente existe.
-     *
-     */
-    private Cliente procurarCliente(String email){
+        // procurar cliente an base de dados
         for(Cliente i: clientes){
-            if (i.getEmail().equals(email)){
+            if (i.getEmail().equals(emailCliente)){
+                // caso o encontre devolver o cliente
                 return i;
             }
         }
-        return null;
+
+        // caso nao seja encontrado um novo clinete criar um
+        System.out.println("Cliente nã encontrado.");
+        System.out.print("Criar novo cliente (y/n): ");
+        String op = sc.nextLine();
+
+        // caso o utilizador se tenha apenas enganado a escrever o email
+        if (op.equals("n")){
+            return login();
+        }
+
+        // Cliente --> email, nome, morada, telefone, dataNascimento
+        System.out.print("Nome: ");
+        String nome = sc.nextLine();
+
+        System.out.print("Morada: ");
+        String morada = sc.nextLine();
+
+        System.out.print("Telefone: ");
+        String telefone = sc.nextLine();
+
+        System.out.print("Data de Nascimento: ");
+        String dataNas = sc.nextLine();
+
+        Cliente novo_cliente = new Cliente(emailCliente,nome,morada,telefone,dataNas);
+
+        // atualizar a base de dados
+        clientes.add(novo_cliente);
+        return novo_cliente;
     }
+
 }

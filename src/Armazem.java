@@ -20,6 +20,7 @@ public class Armazem implements Serializable{
     /**
      * Aqui forma-se a ligação entre o ficheiro dos produtos com a funcionalidade da classe Armazem.
      * Basicamente no ficheiro com a listagem dos produtos cala linha começa com o nome do tipo de produto(ex:"Alimentar) a partir daí as restantes parselas(divididas por ";") são os atributos da do produto(sejam eles alimentares,de limpeza ou de mobiliário.
+     *
      * @param ficheiroProdutos nome do ficheiro que contemos produtos
      */
     public Armazem(String ficheiroProdutos) {

@@ -24,4 +24,12 @@ public class ProdutoMobiliario extends Produto {
     public double peso(){
         return peso;
     }
+
+    @Override
+    public String toString() {
+        return "ProdutoMobiliario{" +
+                "peso=" + peso +
+                ", dimensao=" + dimensao +
+                '}';
+    }
 }

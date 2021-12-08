@@ -35,14 +35,20 @@ abstract class Produto implements Serializable {
     }
 
     /**
-     * Método abstrato que servirá para obter o peso do produto mobiliário.
+     * Método para obter o peso do produto mobiliário.
      *
+     * @return peso do produto
      */
-    public abstract double peso();
+    protected abstract double peso();
 
     /**
      * Método que irá ser usado na classe minivenda para calcular o custo da quantidade de um certo produto.
      * Para além do que já foi enunciado a mesma irá ver se o produto terá peso superior a 15(só os mobiliários têm um valor diferente de 0) se isto for verdade ,então o balor da minivenda terá um acréscimo de valor de 10.
+     *
+     * @param dia dia da compra
+     * @param quantidade quantidade do produto
+     *
+     * @return custo do produto em certa quantidade
      */
     public int custoComQuantidade(int dia, int quantidade){
         int temp;
@@ -59,7 +65,8 @@ abstract class Produto implements Serializable {
     /**
      *  Função que tem como unica funcionalidade a impressão no talão do tipo de promoção que havia no dia da compra,ou se não há promoção.
      *
-     *
+     * @param dia dia da compra
+     * @return obter a tag da promucao do dia caso esta exista.
      */
     public String promo(int dia){
         Promocao temp = obterPromocao(dia);
@@ -69,8 +76,10 @@ abstract class Produto implements Serializable {
 
     /**
      * Este método irá verificar se o produto está em promoção ou não,se estiver irá verificar o tipo da promoção.
+     *
      * @param diaAtual Dia da compra.
      *
+     * @return promucao aplicavel a este produto no diaAtual
      */
     private Promocao obterPromocao(int diaAtual){
         if (diaEsta(diasP3L4, diaAtual)){
@@ -84,6 +93,9 @@ abstract class Produto implements Serializable {
     /**
      * O método vai dividir a string diasDePromo(poderá ser diasP3L4 ou da promoção diasPagueMenos) que está composta pelo diainicio!diafinal,de forma a verificar se o dia da compra(diaAual) está entre os dias de promoção.
      *
+     * @param diasDePromo intervalo de dias na forma (dia - dia)
+     * @param diaAtual Dia da compra.
+     * @return se o diaAtual esta ou nao dentro de um serto entrevalo de dias.
      */
     private boolean diaEsta(String diasDePromo, int diaAtual){
         // ...;0!10;...
