@@ -1,10 +1,9 @@
-import javax.swing.plaf.SpinnerUI;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Compra implements Serializable {
     private final String frequencia;
-    private ArrayList<MiniVenda> miniVendas;
+    private final ArrayList<MiniVenda> miniVendas;
     private final String data;
     private final int dia;
 
