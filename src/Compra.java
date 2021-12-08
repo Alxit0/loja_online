@@ -18,7 +18,7 @@ public class Compra implements Serializable {
         this.frequencia = frequencia;
         this.miniVendas = new ArrayList<>();
         this.data = data;
-        this.dia = Integer.parseInt(data.split("-")[0]);
+        this.dia = Integer.parseInt(data.split("/")[0]);
     }
 
     /**
@@ -55,6 +55,12 @@ public class Compra implements Serializable {
         if (chek) miniVendas.add(new MiniVenda(prod, quant));
     }
 
+    /**
+     * Calculo do valor de transporte mediante a frequencia do cliente, o tipo de produto (peso) e o valor total da compra.
+     *
+     * @param precoFinal valor final do preco para calcularmos o valor de transporte.
+     * @return preco que o transporte custa.
+     */
     public int precoTransporte(int precoFinal){
         int temp = 0;
         for(MiniVenda i: miniVendas){

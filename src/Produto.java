@@ -14,7 +14,6 @@ abstract class Produto implements Serializable {
     private final String nome;
     private final int precoUni;
     private int stockExistente;
-
     private final String diasP3L4;
     private final String diasPagueMenos;
 
