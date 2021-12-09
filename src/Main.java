@@ -27,7 +27,7 @@ public class Main {
         // System.out.println(loja.getClienteAtivo());
         loja.menu();
 
-        loja.exit("ficheiroClientes","ficheiroProdutos");
+        loja.exit(FICHEIRO_CLIENTES, FICHEIRO_PRODUTOS);
     }
 
     /**
