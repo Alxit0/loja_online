@@ -85,13 +85,13 @@ public class Cliente implements Serializable {
         int precoTransporte = temp.precoTransporte(precoFinal);
 
         // caso o carrinho esteja vazio nao faz sentido guardar a compra
-        if (precoFinal == precoTransporte){
+        if (precoFinal == 0){
             System.out.println("Compra anula.");
             System.out.println(">>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<");
             return;
         }
         System.out.println("Transporte: " + precoTransporte + "$");
-        System.out.println("Total: "+precoFinal+"$");
+        System.out.println("Total: " + (precoFinal+precoTransporte) + "$");
         System.out.println(">>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<");
         compras.add(temp);
 

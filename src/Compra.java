@@ -23,6 +23,7 @@ public class Compra implements Serializable {
 
     /**
      * Funcao que quando chamada itera por uma lista de MiniVenda e calcula o seu valor final ja com os descontos
+     * Sem as taxas de transporte
      *
      * @return preco final da compra
      */
@@ -32,8 +33,6 @@ public class Compra implements Serializable {
         for(MiniVenda i: miniVendas){
             precoFinal += i.custoMinivenda(dia);
         }
-
-        precoFinal += precoTransporte(precoFinal);
 
         return precoFinal;
     }
@@ -94,7 +93,9 @@ public class Compra implements Serializable {
         for (MiniVenda i: miniVendas){
             resp.append(i.versaoTalao(dia)).append("\n\t");
         }
-        resp.append("Transporte ------ ").append(precoTransporte(precoCompra())).append("$");
+        int transporte = precoTransporte(precoCompra());
+        resp.append("Transporte ------ ").append(transporte).append("$");
+        resp.append("\nTotal ----- ").append(precoCompra()+transporte).append("$");
         return "Compra no dia "+ data +":\n\t"+resp+'\n';
 
     }
