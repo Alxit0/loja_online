@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author Alexandre
  * @author Bernardo
  */
-abstract class Produto implements Serializable {
+public abstract class Produto implements Serializable {
     private final int identificador;
     private final String nome;
     private final int precoUni;
