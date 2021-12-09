@@ -45,11 +45,10 @@ public class Cliente implements Serializable {
      * @param sc Pertence á classe Scanner que tem como finalidade facilitar a entrada de dados na consola, neste caso irá representar 4 valores(0 a 3) que irão ser tomados pela variável op.
      * @param armazem Pertence á classe armazem e servirá para se poder obter os produtos que estão guardados nos arraylist´s de produtos,sejam eles alimentares,limpeza ou de mobiliário.
      * @param data Este parâmetro corresponde á data que a compra é feita
-     * @param clienteAtivo Corresponde ao cliente que está a utilizar o programa
      */
-    public void adicionamosCompra(Scanner sc, Armazem armazem, String data, Cliente clienteAtivo){
+    public void adicionamosCompra(Scanner sc, Armazem armazem, String data){
         System.out.println(">>>>>>>>>>>>>>>>> Compra <<<<<<<<<<<<<<<<<");
-        Compra temp = new Compra(clienteAtivo.getFrequencia(), data);
+        Compra temp = new Compra(frequencia, data);
 
         while (true){
             System.out.println("-------------- Catalago --------------");
@@ -138,32 +137,20 @@ public class Cliente implements Serializable {
             int item = sc.nextInt();
             if (item == 0)break;
             Produto produtoEmQuestao = produtos.get(item - 1);
-            pedirQuantidade(temp, sc, produtoEmQuestao);
-        }
-    }
-
-    /**
-     * Este método irá pedir a quantidade do produto escolhido pelo utilizador que quer comprar.
-     * Para além disso o mesmo irá verificar se o produto terá stock suficiente, se não o tiver será pedido a quantidade outra vez.
-     *
-     * @param temp Este parâmetro representa a compra que está a ser efetuada
-     * @param sc Pertence á classe Scanner que tem como finalidade facilitar a entrada de dados na consola, neste caso irá representar o valor da quantidade
-     * @param produtoEmQuestao Representa o produto ao qual é pedida a quantidade do mesmo
-     */
-    private void pedirQuantidade(Compra temp, Scanner sc, Produto produtoEmQuestao){
-        System.out.print("   Quantidade de "+produtoEmQuestao.getNome()+": ");
-        int quant = sc.nextInt();
-
-        while (produtoEmQuestao.getStockExistente() < quant){
-            System.out.println("   >> Stock insuficiente");
             System.out.print("   Quantidade de "+produtoEmQuestao.getNome()+": ");
-            quant = sc.nextInt();
-        }
-        // caso o utilizador se tenha enganado na tecla pode pedir 0 do produto
-        if (quant == 0)return;
-        produtoEmQuestao.setStockExistente(produtoEmQuestao.getStockExistente() - quant);
+            int quant = sc.nextInt();
 
-        temp.adicionarMinivenda(produtoEmQuestao, quant);
+            while (produtoEmQuestao.getStockExistente() < quant){
+                System.out.println("   >> Stock insuficiente");
+                System.out.print("   Quantidade de "+produtoEmQuestao.getNome()+": ");
+                quant = sc.nextInt();
+            }
+            // caso o utilizador se tenha enganado na tecla pode pedir 0 do produto
+            if (quant == 0)return;
+            produtoEmQuestao.setStockExistente(produtoEmQuestao.getStockExistente() - quant);
+
+            temp.adicionarMinivenda(produtoEmQuestao, quant);
+        }
     }
 
     @Override

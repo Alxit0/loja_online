@@ -40,7 +40,7 @@ public class Loja {
 
             if (op == 0)break;
             else if (op == 1){
-                clienteAtivo.adicionamosCompra(sc, armazem, data, clienteAtivo);
+                clienteAtivo.adicionamosCompra(sc, armazem, data);
             }else if (op == 2){
                 clienteAtivo.mostrarCompras();
             }

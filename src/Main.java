@@ -28,6 +28,7 @@ public class Main {
         loja.menu();
 
         loja.exit(FICHEIRO_CLIENTES, FICHEIRO_PRODUTOS);
+        System.out.println("================ Terminado ================");
     }
 
     /**
