@@ -43,6 +43,7 @@ public class Main {
 
         if(data.split("/").length != 3){
             System.out.println("Formato invalido");
+            return pedirData();
         }
 
         return data;

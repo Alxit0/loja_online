@@ -121,7 +121,7 @@ public class Loja {
             File f = new File(ficheiroClientes+".dat");
 
             FileInputStream fis = new FileInputStream(f);
-            System.out.println("Object");
+            // System.out.println("Object");
             ObjectInputStream ois = new ObjectInputStream(fis);
 
             clientes = (ArrayList<Cliente>) ois.readObject();
@@ -192,8 +192,16 @@ public class Loja {
 
                         int id = Integer.parseInt(miniVenda.split("!")[0]);
                         int power = (int) Math.pow(10, (int) Math.log10(id)); // Obter o 'tamanho do numero'
-                        int pointer = id / power; // obter o primeiro digito (lista pointer)
-                        int index = id % power; // obter o tamanho resto do numero
+                        int pointer;
+                        int index;
+                        if(power == 0){
+                            pointer = 0;
+                            index = 0;
+                        }else {
+                            pointer = id / power; // obter o primeiro digito (lista pointer)
+                            index = id % power; // obter o tamanho resto do numero
+                        }
+
 
                         if (pointer == 0){
                             compraTemp.adicionarMinivenda(armazem.getProdutosAlimentares().get(index), quant);
@@ -211,6 +219,7 @@ public class Loja {
                 }
                 clienteTemp.setCompras(compras);
                 clientes.add(clienteTemp); // adicionar clinete á base de dados
+                // System.out.println(temp[0]);
             }
             br.close();
             fr.close();
