@@ -92,6 +92,7 @@ public class Loja {
      */
     private void importarArmazem(String ficheiroProdutos){
         try {
+            // tentamos objetos
             File f = new File(ficheiroProdutos+".dat");
 
             FileInputStream fis = new FileInputStream(f);
@@ -103,6 +104,7 @@ public class Loja {
             ois.close();
             fis.close();
         }catch (Exception a){
+            // tentamos texto
             this.armazem = new Armazem(ficheiroProdutos);
         }
 
@@ -118,6 +120,7 @@ public class Loja {
     @SuppressWarnings("unchecked")
     private void importarClientes(String ficheiroClientes){
         try{
+            // tentamos objetos
             File f = new File(ficheiroClientes+".dat");
 
             FileInputStream fis = new FileInputStream(f);
@@ -201,7 +204,6 @@ public class Loja {
                             pointer = id / power; // obter o primeiro digito (lista pointer)
                             index = id % power; // obter o tamanho resto do numero
                         }
-
 
                         if (pointer == 0){
                             compraTemp.adicionarMinivenda(armazem.getProdutosAlimentares().get(index), quant);
